@@ -28,8 +28,8 @@ urlpatterns += [
     path('ordersystem/', include('ordersystem.urls')),
 ]
 
-urlpatterns += [
-    path('', RedirectView.as_view(url='/ordersystem/', permanent=True)),
-]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += [
+#     path('', RedirectView.as_view(url='/ordersystem/', permanent=True)),
+# ]
+#
+# urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
