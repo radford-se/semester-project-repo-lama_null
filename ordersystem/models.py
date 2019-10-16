@@ -7,8 +7,8 @@ class OrderSystem(models.Model):
 
     # Fields
     name = models.CharField(max_length=20)
-    # customer = models.ForeignKey('UserAccount')
-    order = models.ForeignKey('Order')
+    customer = models.ForeignKey('UserAccount', on_delete=models.CASCADE)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
 
     # Metadata
     class Meta:
@@ -39,9 +39,9 @@ class UserAccount(models.Model):
 
 
 class CustomerAccount(UserAccount):
-    order = models.ForeignKey('Order')
-    favorite_item = models.ForeignKey('InventoryItem')
-    favorite_order = models.ForeignKey('Order')
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    favorite_item = models.ForeignKey('InventoryItem', on_delete=models.CASCADE)
+    favorite_order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='favorite_order')
 
 
 class AdminAccount(UserAccount):
@@ -50,3 +50,11 @@ class AdminAccount(UserAccount):
 
 class InventoryItem(models.Model):
     name = models.CharField(max_length=100)
+    # photo = models.ImageField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    inventory_count = models.IntegerField()
+    description = models.TextField(max_length=2000)
+
+
+class Order(models.Model):
+    customer = models.ForeignKey('Order', on_delete=models.CASCADE)
