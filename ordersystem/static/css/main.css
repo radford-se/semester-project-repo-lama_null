@@ -3858,7 +3858,7 @@ input, select, textarea {
 
 			#main > .posts > * {
 				padding: 4rem;
-				width: 50%;
+				width: 33%;
 			}
 
 			#main > .posts > article {
@@ -3871,10 +3871,6 @@ input, select, textarea {
 
 				#main > .posts > article > :last-child {
 					margin-bottom: 0;
-				}
-
-				#main > .posts > article:nth-child(2n - 1) {
-					border-left-width: 0;
 				}
 
 				#main > .posts > article:nth-child(-n + 2) {
