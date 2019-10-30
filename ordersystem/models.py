@@ -31,11 +31,17 @@ class UserAccount(models.Model):
 
     # Metadata
     class Meta:
-        ordering = ['last_name']
+        ordering = ['last_name', 'first_name']
 
     # Methods
     def __str__(self):
         return self.username
+
+    def change_first_name(self, new_name):
+        self.first_name = new_name
+
+    def change_last_name(self, new_name):
+        self.last_name = new_name
 
 
 class CustomerAccount(UserAccount):
