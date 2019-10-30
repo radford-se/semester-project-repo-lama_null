@@ -24,22 +24,22 @@
 					<div id="intro">
 						<h1>Carol Lee<br />
 						Donuts</h1>
-						<p> </p>
 						<ul class="actions">
-						<p>An Interactive Carrol lee doughnuts site</p>
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+							<li><a href="#menu" class="button scrolly" style="margin-right:10px">VIEW MENU</a></li><br />
+							<!-- templates/registration/login.html -->
+							<form method="post">
+								{% csrf_token %}
+								{{ form.as_p }}
+								<a href="accounts/login/" class="button" style="margin-left:10px">Login</a>
+							</form>
 						</ul>
 					</div>
-
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Massively</a>
-					</header>
 
 				<!-- Nav -->
 
 				<!-- Main -->
 					<div id="main">
+
 
 						<!-- Featured Post -->
 							<article class="post featured">
@@ -59,7 +59,7 @@
                         </section>
 
                         <!-- Yeast-Raised -->
-                            <section class="posts">
+                            <section id ="menu" class="posts">
 								<article>
 									<header>
 										<h3>Glazed</h3>
@@ -201,7 +201,6 @@
 							</section>
 
 					</div>
-
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
@@ -254,6 +253,8 @@
 
 				<!-- Copyright -->
 					<div id="copyright">
+						<p>This is Massively, a free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
+						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
 						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
 					</div>
 
