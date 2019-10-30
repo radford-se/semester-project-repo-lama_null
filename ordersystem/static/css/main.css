@@ -2586,7 +2586,18 @@ input, select, textarea {
 			font-family: 'Font Awesome 5 Brands';
 		}
 
+
+
 /* Image */
+
+    #about-image {
+		border-radius: 15px;
+	}
+
+	#about-image:hover {
+	    opacity: 0.5;
+	    transition: .5s ease;
+	}
 
 	.image {
 		border: 0;
