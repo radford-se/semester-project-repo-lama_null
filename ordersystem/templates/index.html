@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Massively by HTML5 UP</title>
+		<title>{% block title %}Donut Shop{% endblock %}</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         {% load static %}
@@ -20,31 +20,29 @@
 
 				<!-- Intro -->
 					<div id="intro">
-						<h1>This is<br />
-						Donuts</h1>
-						<p>A free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
+						<h1>DONUT SHOP</h1>
 						<ul class="actions">
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+							<li><a href="#menu" class="button scrolly" style="margin-right:10px">VIEW MENU</a></li><br />
+							<!-- templates/registration/login.html -->
+							<form method="post">
+								{% csrf_token %}
+								{{ form.as_p }}
+								<a href="accounts/login/" class="button" style="margin-left:10px">Login</a>
+							</form>
 						</ul>
 					</div>
-
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Massively</a>
-					</header>
 
 				<!-- Nav -->
 
 				<!-- Main -->
-					<div id="main">
+					<div id="main">{% block content %}
+
 
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<span class="date">April 25, 2017</span>
-									<h2><a href="#">And this is a<br />
-									massive headline</a></h2>
+									<span id="menu" class="date">Donut Shop Menu</span>
+									<h2><a href="#">MENU</a></h2>
 									<p>Aenean ornare velit lacus varius enim ullamcorper proin aliquam<br />
 									facilisis ante sed etiam magna interdum congue. Lorem ipsum dolor<br />
 									amet nullam sed etiam veroeros.</p>
@@ -70,16 +68,7 @@
 									</ul>
 								</article>
 								<article>
-									<header>
-										<span class="date">April 22, 2017</span>
-										<h2><a href="#">Primis eget<br />
-										imperdiet lorem</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
+
 								</article>
 								<article>
 									<header>
@@ -147,7 +136,7 @@
 							</footer>
 
 					</div>
-
+    				{% endblock %}
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
@@ -199,6 +188,8 @@
 
 				<!-- Copyright -->
 					<div id="copyright">
+						<p>This is Massively, a free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
+						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
 						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
 					</div>
 
