@@ -25,9 +25,14 @@ class UserAccount(models.Model):
     def change_last_name(self, new_name):
         self.last_name = new_name
 
+    def change_email(self, new_email):
+        self.email = new_email
 
 class CustomerAccount(UserAccount):
-    pass
+
+    def create_new_order(self):
+        # items_in_cart =
+        new_order = Order
 
 
 class AdminAccount(UserAccount):
@@ -63,3 +68,8 @@ class Order(models.Model):
     # Methods
     def __str__(self):
         return self.order_number
+
+class Cart(models.Model):
+    customer = models.OneToOneField("CustomerAccount",
+                                    on_delete=models.CASCADE,
+                                    null=True)
