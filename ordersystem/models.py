@@ -3,24 +3,6 @@ from django.db import models
 
 
 # Create your models here.
-class OrderSystem(models.Model):
-    # Fields
-    name = models.CharField(max_length=20)
-    customer = models.ForeignKey('UserAccount', on_delete=models.CASCADE)
-    order = models.ForeignKey('Order', on_delete=models.CASCADE)
-
-    # Metadata
-    class Meta:
-        ordering = ['name']
-
-    # Methods
-    def get_absolute_url(self):
-        return reverse('model-detail-view', args=[str(self.id)])
-
-    def __str__(self):
-        return self.my_field_name
-
-
 class UserAccount(models.Model):
     # Fields
     first_name = models.CharField(max_length=30)
