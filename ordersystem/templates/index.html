@@ -11,6 +11,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         {% load static %}
 		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}" />
 		<link rel="stylesheet" href="{% static 'css/noscript.css' %}" />
 	</head>
 	<body class="is-preload">
@@ -20,124 +22,187 @@
 
 				<!-- Intro -->
 					<div id="intro">
-						<h1>Carol Lee<br />
+						<h1>Carol Lee<br/>
 						Donuts</h1>
-						<p> </p>
 						<ul class="actions">
-							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+							<li><a href="#menu" class="button scrolly" style="margin-right:10px">VIEW MENU</a></li><br />
+							<!-- templates/registration/login.html -->
+							<form method="post">
+								<a href="accounts/login/" class="button" style="margin-left:10px">Login</a>
+							</form>
 						</ul>
 					</div>
-
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Massively</a>
-					</header>
 
 				<!-- Nav -->
 
 				<!-- Main -->
 					<div id="main">
 
+
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
 									<h2>About Us</h2>
-                                    <!--class="image main"-->
-								    <a href="#"><img src="{% static 'images/CarolLeeSign.png' %}" alt="Sign outside of Carol Lee Donuts" /></a>
-									<p>Welcome to Carol Lee Donuts. We have been in business since 1969.</p>
+
+								    <a href="#"><img id="about-image" src="{% static 'images/CarolLeeSign.png' %}" alt="Sign outside of Carol Lee Donuts" /></a>
+									<p><i>Welcome to Carol Lee Donuts. We have been in business since 1968.</i></p>
+                                    <p >Carol Lee was a doughnut franchise that started in Kansas. It's no longer in business; the franchise went
+                                        out quite a few years ago, but Carol was Lee's secretary, and Lee was president of the franchise.
+                                        Blacksburg's Carol Lee's is a local, family-operated business that has been in the college community since 1968.
+                                        The bakery is actually divided into two separate businesses. Carol Lee's Doughnuts is on one side of the shop, and
+                                        then Carol Lee's Cakes, which works solely by special order, is on the other side. Norman Kidd ran the business until
+                                        he passed it down to his daughters, Sherree Surface and Melinda Strager, who manage the cake and doughnut shops, respectively.
+                                    </p>
 								</header>
-								<ul class="actions special">
-									<li><a href="#" class="button large">Full Story</a></li>
-								</ul>
 							</article>
 
-						<!-- Posts -->
+                        <section>
+                            <div class="wide" id ="menu"><h2>Yeast-Raised</h2></div>
+                        </section>
+
+                        <!-- Yeast-Raised -->
+                            <section  class="posts">
+								<article>
+									<header>
+										<h3>Glazed</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>Chocolate Iced</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>Granulated Sugar</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>Cinnamon Sugar</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>Chocolate Iced Sprinkles</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>White Iced Sprinkles</h3>
+									</header>
+								</article>
+                                <article>
+									<header>
+										<h3>Maple Iced (w/ Peanuts)</h3>
+									</header>
+								</article>
+                                <article>
+									<header>
+										<h3>Chocolate Iced (w/ Peanuts)</h3>
+									</header>
+								</article>
+                                <article>
+									<header>
+										<h3>White Coconut</h3>
+									</header>
+								</article>
+                                <article>
+									<header>
+										<h3>Toasted Coconut</h3>
+									</header>
+								</article>
+							</section>
+                        <section>
+                            <div class="wide"><h2>Cake</h2></div>
+                        </section>
+						<!-- Cake -->
 							<section class="posts">
 								<article>
 									<header>
-										<h2><a href="#">Sed magna<br />
-										ipsum faucibus</a></h2>
+										<h3>Old Fashioned</h3>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
 								</article>
 								<article>
 									<header>
-										<h2><a href="#">Primis eget<br />
-										imperdiet lorem</a></h2>
+										<h3>Cinnamon Sugar</h3>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
 								</article>
 								<article>
 									<header>
-										<h2><a href="#">Ante mattis<br />
-										interdum dolor</a></h2>
+										<h3>Powdered Sugar</h3>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
 								</article>
 								<article>
 									<header>
-										<h2><a href="#">Tempus sed<br />
-										nulla imperdiet</a></h2>
+										<h3>Chocolate Iced</h3>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
 								</article>
 								<article>
 									<header>
-										<h2><a href="#">Odio magna<br />
-										sed consectetur</a></h2>
+										<h3>Blueberry</h3>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
 								</article>
 								<article>
 									<header>
-										<h2><a href="#">Augue lorem<br />
-										primis vestibulum</a></h2>
+										<h3>Chocolate Iced Devil's Food</h3>
 									</header>
-									<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
+								</article>
+                                <article>
+									<header>
+										<h3>Glazed Devil's Food</h3>
+									</header>
+								</article>
+							</section>
+                        <section>
+                            <div class="wide"><h2>Filled</h2></div>
+                        </section>
+                        <!-- Filled -->
+                            <section class="posts">
+								<article>
+									<header>
+										<h3>Bavarian Cream</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>Raspberry</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>Apple</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>White Delight</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>Lemon</h3>
+									</header>
+								</article>
+							</section>
+                        <section>
+                            <div class="wide"><h2>Handmade</h2></div>
+                        </section>
+                        <!-- Handmade -->
+                            <section class="posts">
+								<article>
+									<header>
+										<h3>Cinnamon Twist</h3>
+									</header>
+								</article>
+								<article>
+									<header>
+										<h3>Cinnamon Roll</h3>
+									</header>
 								</article>
 							</section>
 
-						<!-- Footer -->
-							<footer>
-								<div class="pagination">
-									<!--<a href="#" class="previous">Prev</a>-->
-									<a href="#" class="page active">1</a>
-									<a href="#" class="page">2</a>
-									<a href="#" class="page">3</a>
-									<span class="extra">&hellip;</span>
-									<a href="#" class="page">8</a>
-									<a href="#" class="page">9</a>
-									<a href="#" class="page">10</a>
-									<a href="#" class="next">Next</a>
-								</div>
-							</footer>
-
 					</div>
-
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
@@ -164,24 +229,25 @@
 						<section class="split contact">
 							<section class="alt">
 								<h3>Address</h3>
-								<p>1234 Somewhere Road #87257<br />
-								Nashville, TN 00000-0000</p>
+								<p>1414 N Main St, Blacksburg,<br />
+									VA 24060</p>
 							</section>
 							<section>
 								<h3>Phone</h3>
-								<p><a href="#">(000) 000-0000</a></p>
+								<p><a href="#">(540) 552-6706</a></p>
 							</section>
-							<section>
+<!--							<section>
 								<h3>Email</h3>
 								<p><a href="#">info@untitled.tld</a></p>
 							</section>
+-->
 							<section>
 								<h3>Social</h3>
 								<ul class="icons alt">
-									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="https://www.facebook.com/carolleedonuts/"><img src="{% static 'images/social/PNG/circle-grey/Facebook.png' %}" width="50" height="50" title="Facebook" alt="Facebook"><span class="label"></span></a></li>
+									<li><a href="https://twitter.com/carolleedonuts?lang=en"><img src="{% static 'images/social/PNG/circle-grey/Twitter.png' %}" width="50" height="50" title="Twitter" alt="Twitter"><span class="label"><span class="label"></span></a></li>
+									<li><a href="https://www.yelp.com/biz/carol-lee-donuts-blacksburg"><img src="{% static 'images/social/PNG/circle-grey/Yelp.png' %}" width="50" height="50" title="Yelp" alt="Yelp"><span class="label"><span class="label"></span></a></li>
+<!--									<li><a href="#"><img src="{% static 'icons/social/PNG/circle-grey/Facebook.png' %}" width="50" height="50" title="White flower" alt="Flower"><span class="label"><span class="label">GitHub</span></a></li> -->
 								</ul>
 							</section>
 						</section>
@@ -189,6 +255,8 @@
 
 				<!-- Copyright -->
 					<div id="copyright">
+						<p>This is Massively, a free, fully responsive HTML5 + CSS3 site template designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
+						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>.</p>
 						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
 					</div>
 
