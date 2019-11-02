@@ -6,7 +6,7 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-
+{% load static %}
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -71,6 +71,7 @@ input, select, textarea {
 	-ms-appearance: none;
 	appearance: none;
 }
+
 
 /* Basic */
 
@@ -4696,3 +4697,22 @@ input, select, textarea {
 
 .wide {
 }
+div#login-background{
+    margin: 2rem 15rem 2rem 15rem;
+    padding: 1rem;
+    background-color: white;
+}
+#logintag{
+    letter-spacing:0px;
+}
+@media only screen and (max-width: 1010px) {
+  div#login-background {
+    margin-top:1rem;
+    margin-left:2rem;
+    margin-right:2rem;
+  }
+  .tablemenu{
+
+  }
+}
+
