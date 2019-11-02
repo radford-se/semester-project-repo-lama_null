@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Log In</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
 </head>
-<body>
+<body class="is-preload">
 <!-- templates/registration/login.html -->
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+<div id="login-background">
+    <section>
+        <article>
+            <header>
+                <h2 id="logintag">LOG IN</h2>
+                <form method="post" action="ordering_page">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="primary" type="submit">Login</button>
+                </form>
+            </header>
+        </article>
+    </section>
+    <section>
+        <article class="post featured">
+            <header>
+                <form><p>Not a member? Make an account or continue as guest</p>
+                    <button type="submit" class="small primary">Sign Up</button>
+                </form>
+                <form> <!--NEEDS ACTION-->
+                    <button type="submit" class="small primary">Continue</button>
+                </form>
+
+            </header>
+        </article>
+    </section>
+</div>
+<script src=" {%  static 'js/jquery.min.js' %}"></script>
+<script src=" {%  static 'js/jquery.scrollex.min.js' %}"></script>
+<script src=" {%  static 'js/jquery.scrolly.min.js' %}"></script>
+<script src=" {%  static 'js/browser.min.js' %}"></script>
+<script src=" {%  static 'js/breakpoints.min.js' %}"></script>
+<script src=" {%  static 'js/util.js' %}"></script>
+<script src=" {%  static 'js/main.js' %}"></script>
 </body>
 </html>
