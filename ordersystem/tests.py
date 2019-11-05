@@ -3,7 +3,12 @@ from unittest import skipIf
 from django.test import TestCase
 
 # Create your tests here.
-from ordersystem.models import CustomerAccount, UserAccount, Cart
+from ordersystem.models import \
+    CustomerAccount, \
+    UserAccount, \
+    Cart, \
+    InventoryItem, \
+    Order
 
 
 class UserAccountTest(TestCase):
@@ -53,3 +58,21 @@ class CartTest(TestCase):
         self.cart1 = Cart(customer=self.user2)
         self.cart1.customer = self.user3
         self.assertEqual(self.cart1.customer, self.user3)
+
+
+class OrderTest(TestCase):
+    def setUp(self):
+        self.item1 = InventoryItem()
+        self.item1.save()
+        self.item2 = InventoryItem()
+        self.item2.save()
+        self.item3 = InventoryItem()
+        self.item3.save()
+
+        self.order1 = Order()
+
+    def test_return_all_orders(self):
+        self.item1.orders.add(self.order1)
+        self.item2.orders.add(self.order1)
+
+        self.assertQuerySetEqual({self.item1, self.item2}, self.order1.get_items_in_order())

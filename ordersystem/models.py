@@ -28,31 +28,13 @@ class UserAccount(models.Model):
     def change_email(self, new_email):
         self.email = new_email
 
-class CustomerAccount(UserAccount):
 
-    def create_new_order(self):
-        # items_in_cart =
-        new_order = Order
+class CustomerAccount(UserAccount):
+    pass
 
 
 class AdminAccount(UserAccount):
     pass
-
-
-class InventoryItem(models.Model):
-    # Fields
-    name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    inventory_count = models.IntegerField()
-    description = models.TextField(max_length=2000)
-
-    # Metadata
-    class Meta:
-        ordering = ['name']
-
-    # Methods
-    def __str__(self):
-        return self.name
 
 
 class Order(models.Model):
@@ -68,6 +50,28 @@ class Order(models.Model):
     # Methods
     def __str__(self):
         return self.order_number
+
+    def get_items_in_order(self):
+        return InventoryItem.objects.filter(id=self.id)
+
+
+class InventoryItem(models.Model):
+    # Fields
+    id = models.BigIntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    inventory_count = models.IntegerField()
+    description = models.TextField(max_length=2000)
+    orders = models.ManyToManyField("Order")
+
+    # Metadata
+    class Meta:
+        ordering = ['name']
+
+    # Methods
+    def __str__(self):
+        return self.name
+
 
 class Cart(models.Model):
     customer = models.OneToOneField("CustomerAccount",
