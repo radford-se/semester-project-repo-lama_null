@@ -1,0 +1,17 @@
+- id: start
+  name: start
+  cmd: docker-compose up -d
+- id: rebuild
+  name: rebuild
+  cmd:
+    - docker-compose down
+    - docker-compose up --build -d
+- id: test
+  name: test
+  cmd: docker-compose exec web python manage.py test
+- id: manage
+  name: manage
+  cmd: docker-compose run --rm manage
+- id: exec
+  name: exec
+  cmd: docker-compose exec app

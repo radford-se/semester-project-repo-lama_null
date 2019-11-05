@@ -3,24 +3,6 @@ from django.db import models
 
 
 # Create your models here.
-class OrderSystem(models.Model):
-    # Fields
-    name = models.CharField(max_length=20)
-    customer = models.ForeignKey('UserAccount', on_delete=models.CASCADE)
-    order = models.ForeignKey('Order', on_delete=models.CASCADE)
-
-    # Metadata
-    class Meta:
-        ordering = ['name']
-
-    # Methods
-    def get_absolute_url(self):
-        return reverse('model-detail-view', args=[str(self.id)])
-
-    def __str__(self):
-        return self.my_field_name
-
-
 class UserAccount(models.Model):
     # Fields
     first_name = models.CharField(max_length=30)
@@ -31,11 +13,20 @@ class UserAccount(models.Model):
 
     # Metadata
     class Meta:
-        ordering = ['last_name']
+        ordering = ['last_name', 'first_name']
 
     # Methods
     def __str__(self):
         return self.username
+
+    def change_first_name(self, new_name):
+        self.first_name = new_name
+
+    def change_last_name(self, new_name):
+        self.last_name = new_name
+
+    def change_email(self, new_email):
+        self.email = new_email
 
 
 class CustomerAccount(UserAccount):
@@ -44,22 +35,6 @@ class CustomerAccount(UserAccount):
 
 class AdminAccount(UserAccount):
     pass
-
-
-class InventoryItem(models.Model):
-    # Fields
-    name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    inventory_count = models.IntegerField()
-    description = models.TextField(max_length=2000)
-
-    # Metadata
-    class Meta:
-        ordering = ['name']
-
-    # Methods
-    def __str__(self):
-        return self.name
 
 
 class Order(models.Model):
@@ -75,3 +50,30 @@ class Order(models.Model):
     # Methods
     def __str__(self):
         return self.order_number
+
+    def get_items_in_order(self):
+        return InventoryItem.objects.filter(id=self.id)
+
+
+class InventoryItem(models.Model):
+    # Fields
+    id = models.BigIntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    inventory_count = models.IntegerField()
+    description = models.TextField(max_length=2000)
+    orders = models.ManyToManyField("Order")
+
+    # Metadata
+    class Meta:
+        ordering = ['name']
+
+    # Methods
+    def __str__(self):
+        return self.name
+
+
+class Cart(models.Model):
+    customer = models.OneToOneField("CustomerAccount",
+                                    on_delete=models.CASCADE,
+                                    null=True)
