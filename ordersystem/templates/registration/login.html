@@ -17,7 +17,7 @@
         <article>
             <header>
                 <h2 id="logintag">LOG IN</h2>
-                <form method="post" action="ordering_page">
+                <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button class="primary" type="submit">Login</button>
