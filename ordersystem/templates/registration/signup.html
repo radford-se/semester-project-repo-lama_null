@@ -1,10 +1,38 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-    <!--<meta charset="UTF-8">-->
-    <!--<title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+</head>
+<body>
+<div id="login-background">
+    {% if request.user.is_authenticated %}
+        <h2>You're already logged in as {{ request.user.username }}, click here to go to the ordering page </h2>
+        <form method="post">
+            {% csrf_token %}
+            <a href="{% url 'ordering_page' %}" class="button">Order Now</a>
+        </form>
+        <br />
+        <p> If you're not {{ request.user.username }}, click the logout button to logout now. </p>
+        <form method="post">
+            {% csrf_token %}
+            <a href="{% url 'logout' %}" class="button">Logout</a>
+        </form>
+    {% else %}
+        <h2>Sign up</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Sign up</button>
+        </form>
+    {% endif %}
+</div>
+</body>
+</html>
 
-<!--</body>-->
-<!--</html>-->
+

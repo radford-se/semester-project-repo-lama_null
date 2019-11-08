@@ -13,38 +13,50 @@
 <body class="is-preload">
 <!-- templates/registration/login.html -->
 <div id="login-background">
-    <section>
-        <article>
-            <header>
-                <h2 id="logintag">LOG IN</h2>
-                <form method="post" action="ordering_page">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="primary" type="submit">Login</button>
-                </form>
-            </header>
-        </article>
-    </section>
-    <section>
-        <article class="post featured">
-            <header>
-                <form><p>Not a member? Make an account or continue as guest</p>
-                    <button type="submit" class="small primary">Sign Up</button>
-                </form>
-                <form> <!--NEEDS ACTION-->
-                    <button type="submit" class="small primary">Continue</button>
-                </form>
-
-            </header>
-        </article>
-    </section>
+    {% if request.user.is_authenticated %}
+        <h2>You're already logged in as {{ request.user.username }}, click here to go to the ordering page </h2>
+        <form method="post" >
+            <a class="button" href="{% url 'ordering_page' %}">Order Now</a>
+        </form>
+        <br/>
+        <p> If you're not {{ request.user.username }}, click the logout button to logout now. </p>
+        <form method="post">
+            <a href="{% url 'logout' %}" class="button">Logout</a>
+        </form>
+    {% else %}
+        <section>
+            <article>
+                <header>
+                    <h2 id="logintag">LOG IN</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="primary" type="submit">Login</button>
+                    </form>
+                </header>
+            </article>
+        </section>
+        <section>
+            <article class="post featured">
+                <header>
+                    <form method="get" action={% url 'signup' %}>
+                        <p>Not a member? Make an account or continue as guest</p>
+                        <button type="submit" class="small primary">Sign Up</button>
+                    </form>
+                    <form method="get" action={% url 'ordering_page' %}>
+                        <button type="submit" class="small primary">Continue</button>
+                    </form>
+                </header>
+            </article>
+        </section>
+    {% endif %}
 </div>
-<script src=" {%  static 'js/jquery.min.js' %}"></script>
-<script src=" {%  static 'js/jquery.scrollex.min.js' %}"></script>
-<script src=" {%  static 'js/jquery.scrolly.min.js' %}"></script>
-<script src=" {%  static 'js/browser.min.js' %}"></script>
-<script src=" {%  static 'js/breakpoints.min.js' %}"></script>
-<script src=" {%  static 'js/util.js' %}"></script>
-<script src=" {%  static 'js/main.js' %}"></script>
+<script src=" {% static 'js/jquery.min.js' %}"></script>
+<script src=" {% static 'js/jquery.scrollex.min.js' %}"></script>
+<script src=" {% static 'js/jquery.scrolly.min.js' %}"></script>
+<script src=" {% static 'js/browser.min.js' %}"></script>
+<script src=" {% static 'js/breakpoints.min.js' %}"></script>
+<script src=" {% static 'js/util.js' %}"></script>
+<script src=" {% static 'js/main.js' %}"></script>
 </body>
 </html>
