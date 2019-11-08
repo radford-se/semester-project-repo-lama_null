@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Now!</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+</head>
+<body class="is-preload">
+<div id="login-background">
+{% if request.user.is_authenticated %}
+    <h2 style="text-align:center;">Hello {{ request.user.username }}</h2>
+    <ul style="list-style: none;padding:0;margin:0;">
+        <li style="display:inline-block;margin:auto;width:33%;text-align:center;">RECENT ORDERS</li>
+        <li style="display:inline-block;margin:auto;width:33%;text-align:center;">FAVORITES</li>
+        <li style="display:inline-block;margin:auto;width:33%;text-align:center;">CART</li>
+    </ul>
+{% else %}
+    <h2 style="text-align:center;">Hello Guest!</h2>
+    <ul style="list-style: none;padding:0;margin:0;">
+        <li style="display:table;margin:auto;text-align:center;">CART</li>
+    </ul>
+{% endif %}
+<br />
+<div style="height:50rem;outline:1px solid black;"></div>
+
+{% if not request.user.is_authenticated %}
+    <p>You are seeing a guest version of our ordering page. Click here to create an account</p>
+    <a class="button" href="{%  url 'signup' %}">Sign Up</a>
+{% endif %}
+</div>
+</body>
+</html>
