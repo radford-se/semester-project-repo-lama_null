@@ -62,7 +62,7 @@ class InventoryItem(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     inventory_count = models.IntegerField()
     description = models.TextField(max_length=2000)
-    orders = models.ManyToManyField("Order")
+    orders = models.ManyToManyField("Order", required=False)
 
     # Metadata
     class Meta:
