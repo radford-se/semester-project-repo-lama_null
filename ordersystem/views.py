@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views.generic.list import ListView
+from .models import InventoryItem, Order
 
 
 def index(request):
@@ -55,3 +57,13 @@ def ordering_page(request):
 
 def thankyou(request):
     return render(request, 'thankyou.html', {})
+
+
+class ItemListView(ListView):
+    context_object_name = 'items'
+    model = InventoryItem
+
+
+class OrderListView(ListView):
+    context_object_name = 'orders'
+    model = Order

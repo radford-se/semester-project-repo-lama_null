@@ -49,7 +49,7 @@ class Order(models.Model):
 
     # Methods
     def __str__(self):
-        return self.order_number
+        return self.order_number.__str__()
 
     def get_items_in_order(self):
         return InventoryItem.objects.filter(id=self.id)
@@ -63,7 +63,6 @@ class InventoryItem(models.Model):
     inventory_count = models.IntegerField()
     description = models.TextField(max_length=2000)
     orders = models.ManyToManyField("Order")
-
     # Metadata
     class Meta:
         ordering = ['name']
@@ -71,6 +70,10 @@ class InventoryItem(models.Model):
     # Methods
     def __str__(self):
         return self.name
+
+    def __unicode__(self):
+        return self.name
+
 
 
 class Cart(models.Model):
