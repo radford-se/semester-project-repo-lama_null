@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from .models import InventoryItem, Order
+from .models import InventoryItem, Order, Cart
 
 
 def index(request):
@@ -67,3 +67,8 @@ class ItemListView(ListView):
 class OrderListView(ListView):
     context_object_name = 'orders'
     model = Order
+
+
+class CartListView(ListView):
+    context_object_name = 'cart'
+    model = Cart

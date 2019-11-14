@@ -12,41 +12,55 @@
 <body class="is-preload">
 <div id="login-background">
 
-{% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated %}
     <h2 style="text-align:center;">Hello {{ request.user.username }}</h2>
     <ul style="list-style: none;padding:0;margin:0;">
-        <li class="button" style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">RECENT ORDERS</li>
-        <li class="button" style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">FAVORITES</li>
-        <li class="button" style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">CART</li>
+        <li class="button"
+            style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">
+            RECENT ORDERS
+        </li>
+        <li class="button"
+            style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">
+            FAVORITES
+        </li>
+        <li class="button"
+            style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">
+            CART
+        </li>
     </ul>
-{% else %}
+    {% else %}
     <h2 style="text-align:center;">Hello Guest!</h2>
     <ul style="list-style: none;padding:0;margin:0;">
         <li style="display:table;margin:auto;text-align:center;">CART</li>
     </ul>
-{% endif %}
-<br />
-<section style="display:flex; outline:1px solid black; justify-content:space-between; flex-wrap:wrap; padding-left:10px; padding-right:10px; padding-bottom:20px;">
-    <header style="width:100%; margin:auto; text-align:center"><h2 >Yeast-Raised<br /></h2></header>
-    {% for item in object_list %}
-    <article class="post featured" style="display:flex; flex-wrap:wrap; width:30%; height:225px; border-radius:10px; margin:5px; background-color:#e1fff5; justify-content:center;"><h5 style="width:100%">{{item.name}}</h5>
-        <span style="width:100%;">${{item.price}}</span><br/>
-        <button style="width:100%; background-color:white; align-self:flex-end;">add to cart[modal]</button>
-    </article>
-    {% endfor %}
-   <header style="width:100%; margin:auto; text-align:center"><h2 >Cake<br /></h2></header>
-    {% for item in object_list %}
-     <article class="post featured" style="display:flex; flex-wrap:wrap; width:30%; height:225px; border-radius:10px; margin:5px; background-color:#e1fff5; justify-content:center;"><h5 style="width:100%">{{item.name}}</h5>
-        <span style="width:100%;">${{item.price}}</span><br/>
-        <button style="width:100%; background-color:white; align-self:flex-end;">add to cart[modal]</button>
-    </article>
-    {% endfor %}
-</section>
+    {% endif %}
+    <br/>
+    <section
+            style="display:flex; outline:1px solid black; justify-content:center; flex-wrap:wrap; padding-left:10px; padding-right:10px; padding-bottom:20px;">
+        <header style="width:100%; margin:auto; text-align:center"><h2>Cake<br/></h2></header>
+        {% for item in object_list %}
+        <article class="post featured"
+                 style="display:flex; flex-wrap:wrap; width:22%; height:200px; border-radius:10px; margin:10px; background-color:#e1fff5; justify-content:center; align-items:flex-end;">
+            <h4 style="width:100%; text-align:center;margin:0; padding:0;align-self:flex-start">{{item.name}}</h4>
+            <span style="width:100%; text-align:center;  align-self:flex-end;margin:0; align-self:flex-end;">${{item.price}}</span><br/>
+            <button style="width:100%; background-color:white; align-self:flex-end; margin:0;">add to cart</button>
+        </article>
+        {% endfor %}
+        <header style="width:100%; margin:auto; text-align:center"><h2>Cake<br/></h2></header>
+        {% for item in object_list %}
+        <article
+                 style="display:flex; flex-wrap:wrap; width:22%; height:200px; border-radius:10px; margin:10px; background-color:#e1fff5; justify-content:center; align-items:flex-end;">
+            <h4 style="width:100%; text-align:center;margin:0; padding:0;align-self:flex-start">{{item.name}}</h4>
+            <span style="width:100%; text-align:center;  align-self:flex-end;margin:0; align-self:flex-end; font-family:sans-serif;">${{item.price}}</span><br/>
+            <button style="width:100%; background-color:white; align-self:flex-end; margin:0; justify-self:center;">add to cart</button>
+        </article>
+        {% endfor %}
+    </section>
 
-{% if not request.user.is_authenticated %}
+    {% if not request.user.is_authenticated %}
     <p>You are seeing a guest version of our ordering page. Click here to create an account</p>
     <a class="button" href="{%  url 'signup' %}">Sign Up</a>
-{% endif %}
+    {% endif %}
 </div>
 </body>
 

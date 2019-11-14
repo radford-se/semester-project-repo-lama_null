@@ -75,8 +75,9 @@ class InventoryItem(models.Model):
         return self.name
 
 
-
 class Cart(models.Model):
     customer = models.OneToOneField("CustomerAccount",
                                     on_delete=models.CASCADE,
                                     null=True)
+
+
