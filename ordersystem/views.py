@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views.generic.base import View
+
+from ordersystem.models import InventoryItem
 
 
 def index(request):
@@ -55,3 +58,14 @@ def ordering_page(request):
 
 def thankyou(request):
     return render(request, 'thankyou.html', {})
+
+
+class InventoryView(View):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        all_items = InventoryItem.objects.all()
+
+        context["menu_items"] = all_items
+        context["test"] = "test"
+
+        return context

@@ -41,7 +41,8 @@ class Order(models.Model):
     # Fields
     order_number = models.IntegerField(null=False, default=00000000)
     customer = models.ForeignKey(CustomerAccount, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now())
+    date = models.DateTimeField(default=timezone.now)
+    total_cost = models.DecimalField(max_digits=5, decimal_places=2, null=True)
 
     # Metadata
     class Meta:
@@ -51,18 +52,15 @@ class Order(models.Model):
     def __str__(self):
         return self.order_number
 
-    def get_items_in_order(self):
-        return InventoryItem.objects.filter(id=self.id)
-
 
 class InventoryItem(models.Model):
     # Fields
     id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-    inventory_count = models.IntegerField()
     description = models.TextField(max_length=2000)
-    orders = models.ManyToManyField("Order")
+    orders = models.ManyToManyField("Order", blank=True)
+    category = models.CharField(default="Miscellaneous", max_length=30)
 
     # Metadata
     class Meta:
@@ -77,3 +75,9 @@ class Cart(models.Model):
     customer = models.OneToOneField("CustomerAccount",
                                     on_delete=models.CASCADE,
                                     null=True)
+
+
+class ItemCartRelationship(models.Model):
+    cart_id = models.ForeignKey("Cart", on_delete=models.CASCADE)
+    item_id = models.ForeignKey("InventoryItem", on_delete=models.CASCADE)
+    quantity = models.IntegerField(null=False, blank=False)
