@@ -52,9 +52,6 @@ class Order(models.Model):
     def __str__(self):
         return self.order_number
 
-    def get_items_in_order(self):
-        return InventoryItem.objects.filter(id=self.id)
-
 
 class InventoryItem(models.Model):
     # Fields
