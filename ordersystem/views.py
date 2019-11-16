@@ -5,12 +5,8 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-<<<<<<< HEAD
 from .models import InventoryItem, Order, Cart
-=======
-from .models import InventoryItem, Order
 from django.views.generic.base import View
->>>>>>> 09ac1d3f7d9e07a3ea078d72d57ac336c89bd6fe
 
 
 def index(request):
@@ -74,7 +70,7 @@ class InventoryView(View):
 
         return context
 
-<<<<<<< HEAD
+
 class OrderListView(ListView):
     context_object_name = 'orders'
     model = Order
@@ -83,5 +79,3 @@ class OrderListView(ListView):
 class CartListView(ListView):
     context_object_name = 'cart'
     model = Cart
-=======
->>>>>>> 09ac1d3f7d9e07a3ea078d72d57ac336c89bd6fe
