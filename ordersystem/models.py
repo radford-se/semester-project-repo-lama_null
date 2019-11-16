@@ -80,10 +80,7 @@ class Cart(models.Model):
                                     null=True)
 
 
-<<<<<<< HEAD
-=======
 class ItemCartRelationship(models.Model):
     cart_id = models.ForeignKey("Cart", on_delete=models.CASCADE)
     item_id = models.ForeignKey("InventoryItem", on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, blank=False)
->>>>>>> 09ac1d3f7d9e07a3ea078d72d57ac336c89bd6fe
