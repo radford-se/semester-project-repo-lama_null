@@ -79,3 +79,7 @@ class OrderListView(ListView):
 class CartListView(ListView):
     context_object_name = 'cart'
     model = Cart
+
+class ItemListView(ListView):
+    context_object_name = 'items'
+    model = InventoryItem
