@@ -50,7 +50,7 @@ class Order(models.Model):
 
     # Methods
     def __str__(self):
-        return self.order_number
+        return self.order_number.__str__()
 
 
 class InventoryItem(models.Model):
@@ -68,6 +68,9 @@ class InventoryItem(models.Model):
 
     # Methods
     def __str__(self):
+        return self.name
+
+    def __unicode__(self):
         return self.name
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Order Now!</title>
+    <title>Order Now</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
@@ -11,13 +11,12 @@
 </head>
 <body class="is-preload">
 <div id="login-background">
-{% block content %}
 {% if request.user.is_authenticated %}
     <h2 style="text-align:center;">Hello {{ request.user.username }}</h2>
     <ul style="list-style: none;padding:0;margin:0;">
-        <li style="display:inline-block;margin:auto;width:33%;text-align:center;">RECENT ORDERS</li>
-        <li style="display:inline-block;margin:auto;width:33%;text-align:center;">FAVORITES</li>
-        <li style="display:inline-block;margin:auto;width:33%;text-align:center;">CART</li>
+        <li class="button" style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">RECENT ORDERS</li>
+        <li class="button" style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">FAVORITES</li>
+        <li class="button" style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">CART</li>
     </ul>
     <ul>
         {% for item in menu_items %}
@@ -35,14 +34,25 @@
     <p>TEST</p>
     </ul>
 {% endif %}
-{% endblock %}
 <br />
-<div style="height:50rem;outline:1px solid black;"></div>
+<section style="display:table; outline:1px solid black; height:auto; justify-content:center; flex-wrap:wrap; align-items:flex-start; overflow:auto;">
+    <header style="width:100%; margin:auto; text-align:center"><h2 >Yeast-Raised<br /></h2></header>
+    {% for item in object_list %}
+    <article class="post featured" style="width:20%; border:1px solid lightgray; height:300px; border-radius:10px; margin:2px; background-color:lightblue;"><h5 >{{item.name}}</h5>
+        <span >${{item.price}}</span><br/>
+        <button style="width:100%; background-color:white;">hello</button>
+    </article>
+    {% endfor %}
+   <header style="width:100%; margin:auto; text-align:center"><h2 >Cake<br /></h2></header>
+</section>
 
 {% if not request.user.is_authenticated %}
     <p>You are seeing a guest version of our ordering page. Click here to create an account</p>
     <a class="button" href="{%  url 'signup' %}">Sign Up</a>
 {% endif %}
 </div>
+</body>
+
+
 </body>
 </html>
