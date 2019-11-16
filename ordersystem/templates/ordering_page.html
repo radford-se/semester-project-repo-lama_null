@@ -18,10 +18,20 @@
         <li class="button" style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">FAVORITES</li>
         <li class="button" style="font-family:inherit; display:inline-block;margin:auto;width:33%;text-align:center; border:1px solid black">CART</li>
     </ul>
+    <ul>
+        {% for item in menu_items %}
+            <p>{{ item.name }}</p>
+        {% endfor %}
+    </ul>
 {% else %}
     <h2 style="text-align:center;">Hello Guest!</h2>
     <ul style="list-style: none;padding:0;margin:0;">
         <li style="display:table;margin:auto;text-align:center;">CART</li>
+    {% for item in menu_items %}
+        <p>{{ item.name }}</p>
+    {% endfor %}
+    <p>{{ test }}</p>
+    <p>TEST</p>
     </ul>
 {% endif %}
 <br />
