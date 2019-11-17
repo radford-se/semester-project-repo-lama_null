@@ -41,16 +41,17 @@
     <br/>
     <section
             style="display:flex; outline:1px solid black; justify-content:center; flex-wrap:wrap; padding-left:10px; padding-right:10px; padding-bottom:20px;">
-        <header style="width:100%; margin:auto; text-align:center"><h2>Cake<br/></h2></header>
-        {% for item in object_list %}
-        <article class="post featured"
-                 style="display:flex; flex-wrap:wrap; width:22%; height:200px; border-radius:10px; margin:10px; background-color:#e1fff5; justify-content:center; align-items:flex-end;">
-            <h4 style="width:100%; text-align:center;margin:0; padding:0;align-self:flex-start">{{item.name}}</h4>
-            <span style="width:100%; text-align:center;  align-self:flex-end;margin:0; align-self:flex-end;">${{item.price}}</span><br/>
-            <button style="width:100%; background-color:white; align-self:flex-end; margin:0;">add to cart</button>
-        </article>
-        {% endfor %}
-        <header style="width:100%; margin:auto; text-align:center"><h2>Cake<br/></h2></header>
+{#        <header style="width:100%; margin:auto; text-align:center"><h2>Cake<br/></h2></header>#}
+{#        {% for item in object_list %}#}
+{#        <article class="post featured"#}
+{#                 style="display:flex; flex-wrap:wrap; width:22%; height:200px; border-radius:10px; margin:10px; background-color:#e1fff5; justify-content:center; align-items:flex-end;">#}
+{#            <h4 style="width:100%; text-align:center;margin:0; padding:0;align-self:flex-start">{{item.name}}</h4>#}
+{#            <span style="width:100%; text-align:center;  align-self:flex-end;margin:0; align-self:flex-end;">${{item.price}}</span><br/>#}
+{#            <button style="width:100%; background-color:white; align-self:flex-end; margin:0;">add to cart</button>#}
+{#        </article>#}
+{#        {% endfor %}#}
+{#        <header style="width:100%; margin:auto; text-align:center"><h2>Cake<br/></h2></header>#}
+    <header style="width:100%; margin:auto; text-align:center"><h2>Select an item<br/></h2></header>
         {% for item in object_list %}
         <article
                 style="display:flex; flex-wrap:wrap; width:22%; height:200px; border-radius:10px; margin:10px; background-color:#e1fff5; justify-content:center; align-items:flex-end;">
