@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from .models import InventoryItem, Order, Cart
+from .models import InventoryItem, Order, Cart, Category
 from django.views.generic.base import View
 
 
@@ -80,6 +80,24 @@ class CartListView(ListView):
     context_object_name = 'cart'
     model = Cart
 
+
 class ItemListView(ListView):
     context_object_name = 'items'
     model = InventoryItem
+
+    # def get_context_data(self, **kwargs):
+    #     context = {}
+    #     categories = Category.objects.all()
+    #
+    #     for category in categories:
+    #         context['items_in_current_cart'] = InventoryItem.objects.filter(category=self.category)
+    #     return context
+
+
+class CategoryListView(ListView):
+    context_object_name = 'categories'
+    model = Category
+
+    def get_context_data(self,**kwargs):
+        context = Category.name
+        return context
