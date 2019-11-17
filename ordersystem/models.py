@@ -55,12 +55,11 @@ class Order(models.Model):
 
 class InventoryItem(models.Model):
     # Fields
-    id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(max_length=2000)
     orders = models.ManyToManyField("Order", blank=True)
-    category = models.CharField(default="Miscellaneous", max_length=30)
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
 
     # Metadata
     class Meta:
@@ -84,3 +83,16 @@ class ItemCartRelationship(models.Model):
     cart_id = models.ForeignKey("Cart", on_delete=models.CASCADE)
     item_id = models.ForeignKey("InventoryItem", on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, blank=False)
+
+
+class Category(models.Model):
+    name = models.CharField(default="Miscellaneous", max_length=30)
+
+    # Methods
+    class Meta:
+        verbose_name_plural = "categories"
+        ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+
