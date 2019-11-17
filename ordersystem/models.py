@@ -55,7 +55,6 @@ class Order(models.Model):
 
 class InventoryItem(models.Model):
     # Fields
-    id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(max_length=2000)
@@ -84,3 +83,7 @@ class ItemCartRelationship(models.Model):
 
 class Category(models.Model):
     name = models.CharField(default="Miscellaneous", max_length=30)
+
+    # Methods
+    def __str__(self):
+        return self.name
