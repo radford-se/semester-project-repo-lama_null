@@ -39,7 +39,7 @@ urlpatterns += [
 
 item_list = {
     'queryset' : InventoryItem.objects.all(),
-    'template_name' : 'ordering_page.html/'
+    # 'template_name' : 'ordering_page.html/'
 }
 order_list = {
     'queryset' : Order.objects.all(),
