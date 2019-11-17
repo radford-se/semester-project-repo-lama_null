@@ -4,9 +4,9 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.views.generic.list import ListView
+from .models import InventoryItem, Order, Cart
 from django.views.generic.base import View
-
-from ordersystem.models import InventoryItem
 
 
 def index(request):
@@ -69,3 +69,17 @@ class InventoryView(View):
         context["test"] = "test"
 
         return context
+
+
+class OrderListView(ListView):
+    context_object_name = 'orders'
+    model = Order
+
+
+class CartListView(ListView):
+    context_object_name = 'cart'
+    model = Cart
+
+class ItemListView(ListView):
+    context_object_name = 'items'
+    model = InventoryItem

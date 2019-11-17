@@ -50,7 +50,7 @@ class Order(models.Model):
 
     # Methods
     def __str__(self):
-        return self.order_number
+        return self.order_number.__str__()
 
 
 class InventoryItem(models.Model):
@@ -69,6 +69,9 @@ class InventoryItem(models.Model):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return self.name
+
 
 class Cart(models.Model):
     customer = models.OneToOneField("CustomerAccount",
@@ -81,9 +84,11 @@ class ItemCartRelationship(models.Model):
     item_id = models.ForeignKey("InventoryItem", on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, blank=False)
 
+
 class Category(models.Model):
     name = models.CharField(default="Miscellaneous", max_length=30)
 
     # Methods
     def __str__(self):
         return self.name
+
