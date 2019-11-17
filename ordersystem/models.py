@@ -60,7 +60,6 @@ class InventoryItem(models.Model):
     description = models.TextField(max_length=2000)
     orders = models.ManyToManyField("Order", blank=True)
     category = models.ForeignKey("Category", on_delete=models.CASCADE)
-
     # Metadata
     class Meta:
         ordering = ['name']
