@@ -31,7 +31,7 @@ urlpatterns = [
     path('thankyou/', views.thankyou, name='thankyou'),
     path('accounts/change_password/', views.change_password, name='change_password'),
     path('orders/', OrderListView.as_view(), name='orders'),
-    path('categories/', CategoryListView.as_view(), name='orders'),
+    path('accounts/settings/', views.change_settings, name='change_settings'),
 ]
 
 urlpatterns += [
@@ -40,7 +40,6 @@ urlpatterns += [
 
 item_list = {
     'queryset' : InventoryItem.objects.all(),
-    'template_name' : 'ordering_page.html/'
 }
 order_list = {
     'queryset': Order.objects.all(),
