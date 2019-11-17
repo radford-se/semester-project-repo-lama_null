@@ -89,6 +89,10 @@ class Category(models.Model):
     name = models.CharField(default="Miscellaneous", max_length=30)
 
     # Methods
+    class Meta:
+        verbose_name_plural = "categories"
+        ordering = ["name"]
+
     def __str__(self):
         return self.name
 
