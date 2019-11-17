@@ -85,13 +85,13 @@ class ItemListView(ListView):
     context_object_name = 'items'
     model = InventoryItem
 
-    def get_context_data(self, **kwargs):
-        context = {}
-        categories = Category.objects.all()
-
-        for category in categories:
-            context['items_in_current_cart'] = InventoryItem.objects.filter(category=self.category)
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = {}
+    #     categories = Category.objects.all()
+    #
+    #     for category in categories:
+    #         context['items_in_current_cart'] = InventoryItem.objects.filter(category=self.category)
+    #     return context
 
 
 class CategoryListView(ListView):
