@@ -120,8 +120,8 @@
     <!-- Footer -->
     <footer id="footer">
         <section>
-            <form method="post" action="#">
-                <div class="fields">
+            <form method="post" action="">
+                <div class="fields" id="mailfields">
                     <div class="field">
                         <label for="name">Name</label>
                         <input type="text" name="name" id="name"/>
@@ -135,10 +135,16 @@
                         <textarea name="message" id="message" rows="3"></textarea>
                     </div>
                 </div>
-                <ul class="actions">
-                    <li><input type="submit" value="Send Message"/></li>
-                </ul>
+                <div id="messageSent" style="display:none">
+                    <h1>Thank You</h1>
+                    <p>Your email has been sent successfully</p>
+                </div>
+<!--                <ul class="actions">-->
+<!--                    <li><input type="submit" value="Send Message"/></li>-->
+<!--                </ul>-->
+
             </form>
+            <button id="messagebutton" onclick="mailSend()">Send Message</button>
         </section>
         <section class="split contact">
             <section class="alt">
@@ -194,6 +200,7 @@
 <script src=" {%  static 'js/breakpoints.min.js' %}"></script>
 <script src=" {%  static 'js/util.js' %}"></script>
 <script src=" {%  static 'js/main.js' %}"></script>
+<script src=" {%  static 'js/mail.js' %}"></script>
 
 </body>
 </html>
