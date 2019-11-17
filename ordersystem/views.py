@@ -52,6 +52,12 @@ def change_password(request):
     return render(request, 'registration/change_password.html', {'form': form})
 
 
+@login_required()
+def change_settings(request):
+    return render(request, 'registration/settings.html')
+
+
+
 # def ordering_page(request):
 #     return render(request, 'ordering_page.html', {})
 

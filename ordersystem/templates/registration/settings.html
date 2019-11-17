@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Change Settings</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+</head>
+<body>
+    <div id="login-background">
+        <h1>Account Settings</h1>
+        <ul style="list-style: none; padding:0; margin:0;">
+            <li><a class="button primary" style="width:100%" href="{% url 'change_password' %}">Change Password</a></li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -31,6 +31,8 @@ urlpatterns = [
     path('thankyou/', views.thankyou, name='thankyou'),
     path('accounts/change_password/', views.change_password, name='change_password'),
     path('orders/', OrderListView.as_view(), name='orders'),
+    path('accounts/settings/', views.change_settings, name='change_settings'),
+
 ]
 
 urlpatterns += [
