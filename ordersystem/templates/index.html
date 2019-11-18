@@ -111,9 +111,8 @@
                 <td>Toasted Coconut</td>
             </tr>
         </table>
-        <form action="accounts/login">
-            <button type="submit" class="large primary">Order
-            Now</button>
+        <form action="{% url 'ordering_page' %}">
+            <button type="submit" class="large primary">Order Now</button>
         </form>
 
     </div>
