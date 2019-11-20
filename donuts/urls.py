@@ -16,8 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ordersystem import views
-from ordersystem.models import InventoryItem, Order, Category
-from ordersystem.views import OrderListView, CategoryListView
+
 
 
 urlpatterns = [
@@ -30,21 +29,9 @@ urlpatterns = [
     path('logout/', views.logout_user, name='logout'),
     path('thankyou/', views.thankyou, name='thankyou'),
     path('accounts/change_password/', views.change_password, name='change_password'),
-    path('orders/', OrderListView.as_view(), name='orders'),
     path('accounts/settings/', views.change_settings, name='change_settings'),
-    path('accounts/admin/', views.admin_page, name='admin_page'),
 ]
 
 urlpatterns += [
     path('ordersystem/', include('ordersystem.urls')),
 ]
-
-item_list = {
-    'queryset' : InventoryItem.objects.all(),
-}
-order_list = {
-    'queryset': Order.objects.all(),
-}
-category_list = {
-    'queryset': Category.objects.all(),
-}
