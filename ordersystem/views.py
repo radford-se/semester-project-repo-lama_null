@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from .models import InventoryItem, Order, Cart, Category, CustomerAccount
+from .models import InventoryItem, Order, Cart, Category
 from django.views.generic.base import View
 
 
@@ -20,12 +20,6 @@ def login(request):
 def logout_user(request):
     logout(request)
     return redirect('../')
-
-
-def ordering_page(request):
-    items = InventoryItem.objects.all()
-    categories = Category.objects.all()
-    return render(request, 'ordering_page.html', {'items': items, 'categories':categories})
 
 
 def signup(request):
@@ -63,13 +57,13 @@ def change_settings(request):
     return render(request, 'registration/settings.html')
 
 
+
+# def ordering_page(request):
+#     return render(request, 'ordering_page.html', {})
+
+
 def thankyou(request):
     return render(request, 'thankyou.html', {})
-
-
-def admin_page(request):
-    users = CustomerAccount.objects.all()
-    return render(request, 'admin.html', {"data": users})
 
 
 class InventoryView(View):
@@ -91,6 +85,19 @@ class OrderListView(ListView):
 class CartListView(ListView):
     context_object_name = 'cart'
     model = Cart
+
+
+class ItemListView(ListView):
+    context_object_name = 'items'
+    model = InventoryItem
+
+    # def get_context_data(self, **kwargs):
+    #     context = {}
+    #     categories = Category.objects.all()
+    #
+    #     for category in categories:
+    #         context['items_in_current_cart'] = InventoryItem.objects.filter(category=self.category)
+    #     return context
 
 
 class CategoryListView(ListView):

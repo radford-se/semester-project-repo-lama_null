@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Now</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+</head>
+<body class="is-preload">
+<div id="login-background">
+
+    {% if request.user.is_authenticated %}
+    <h2 style="text-align:center;">Hello {{ request.user.username }}</h2>
+    <ul style="list-style: none;padding:0;margin:0;display:flex;">
+
+        <li style="width:24.7%;">
+            <a  style="font-family:inherit;display:inline-block;margin:auto;width:100%;text-align:center;border:1px solid black" class="button primary" href="{% url 'change_settings' %}">Account settings</a>
+        </li>
+        <li class="button"
+            style="font-family:inherit; display:inline-block;margin:auto;width:24.7%;text-align:center; border:1px solid black">
+            RECENT ORDERS
+        </li>
+        <li class="button"
+            style="font-family:inherit; display:inline-block;margin:auto;width:24.7%;text-align:center; border:1px solid black">
+            FAVORITES
+        </li>
+        <li class="button"
+            style="font-family:inherit; display:inline-block;margin:auto;width:24.7%;text-align:center; border:1px solid black">
+            CART
+        </li>
+    </ul>
+    {% else %}
+    <h2 style="text-align:center;">Hello Guest!</h2>
+    <ul style="list-style: none;padding:0;margin:0;">
+        <li style="display:table;margin:auto;text-align:center;"><a  style="font-family:inherit;display:inline-block;margin:auto;width:100%;text-align:center;border:1px solid black" class="button" >CART</a></li>
+    </ul>
+    {% endif %}
+    <br/>
+    <section style="display:flex; outline:1px solid black; justify-content:center; flex-wrap:wrap; padding-left:10px; padding-right:10px; padding-bottom:20px;">
+    <header style="width:100%; margin:auto; text-align:center"><h2>Select an item<br/></h2></header>
+        {% for item in object_list %}
+        <article style="display:flex; flex-wrap:wrap; width:22%; height:150px; border-radius:10px; margin:10px; background-image:linear-gradient(to top, white, #e1fff5); justify-content:center; align-items:flex-end; filter:drop-shadow(1p 1px 1px grey);">
+            <h4 style="width:100%; text-align:center;margin:0; padding:0;align-self:flex-start; overflow-wrap:break-word">{{item.name}}</h4>
+            <span style="width:100%; text-align:center;  align-self:flex-end;margin:0; align-self:flex-end; font-family:sans-serif;">${{item.price}}</span><br/>
+            <button style="width:100%; background-color:white; align-self:flex-end; margin:0; justify-self:center;">add
+                to cart
+            </button>
+        </article>
+        {% endfor %}
+    </section>
+
+    {% if not request.user.is_authenticated %}
+    <p>You are seeing a guest version of our ordering page. Click here to create an account, or login</p>
+    <a class="button primary" href="{%  url 'signup' %}">Sign Up</a>
+    <a class="button primary" href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+</body>
+
+
+</body>
+</html>
