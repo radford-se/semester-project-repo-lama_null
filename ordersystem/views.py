@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import InventoryItem, Category, CustomerAccount
+from django.views.generic.list import ListView
+from .models import InventoryItem, Order, Cart, Category, CustomerAccount
 from django.views.generic.base import View
 
 
@@ -24,7 +25,7 @@ def logout_user(request):
 def ordering_page(request):
     items = InventoryItem.objects.all()
     categories = Category.objects.all()
-    return render(request, 'ordering_page.html', {'items': items, 'categories': categories})
+    return render(request, 'ordering_page.html', {'items': items, 'categories':categories})
 
 
 def signup(request):
@@ -79,4 +80,23 @@ class InventoryView(View):
         context["menu_items"] = all_items
         context["test"] = "test"
 
+        return context
+
+
+class OrderListView(ListView):
+    context_object_name = 'orders'
+    model = Order
+
+
+class CartListView(ListView):
+    context_object_name = 'cart'
+    model = Cart
+
+
+class CategoryListView(ListView):
+    context_object_name = 'categories'
+    model = Category
+
+    def get_context_data(self,**kwargs):
+        context = Category.name
         return context
