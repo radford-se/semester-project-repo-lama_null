@@ -30,6 +30,9 @@ urlpatterns = [
     path('thankyou/', views.thankyou, name='thankyou'),
     path('accounts/change_password/', views.change_password, name='change_password'),
     path('accounts/settings/', views.change_settings, name='change_settings'),
+    path('accounts/recent_orders/', views.recent_orders, name='recent_orders'),
+    path('accounts/favorites/', views.favorites, name='favorites'),
+    path('accounts/view_cart/', views.view_cart, name='view_cart'),
 ]
 
 urlpatterns += [

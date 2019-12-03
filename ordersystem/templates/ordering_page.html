@@ -12,54 +12,27 @@
 </head>
 <body class="is-preload">
 <div id="login-background">
-    <div class="modal" id="recentOrders">
-        <div class="modal-content">
-            <span class="close">x</span>
-            <h2>Recent Orders</h2>
-            <p>Order 1</p>
-            <p>Order 2</p>
-        </div>
-    </div>
-    <div class="modal" id="favorites">
-        <div class="modal-content">
-            <span class="close">x</span>
-            <h2>Favorites</h2>
-            <p>item 1</p>
-            <p>item 2</p>
-        </div>
-    </div>
-    <div class="modal" id="cart">
-        <div class="modal-content">
-            <span class="close">x</span>
-            <h2>Cart</h2>
-            <p>item 1</p>
-            <p>item 2</p>
-            <a class="button">Go to Checkout</a>
-        </div>
-    </div>
     {% if request.user.is_authenticated %}
     <h2 style="text-align:center;">Hello {{ request.user.username }}</h2>
-    <ul style="list-style: none;padding:0;margin:0;display:flex;justify-content:space-around;">
+    <ul style="list-style: none;padding:0;margin:0; display:flex; justify-content:space-around;">
 
         <li style="width:25.7%;">
-            <a class="button primary" href="{% url 'change_settings' %}">Account settings</a>
+            <a class="button primary menu-header-buttons" href="{% url 'change_settings' %}">Account settings</a>
         </li>
-        <li id="recentOrdersButton" class="button menu-header-buttons"
-            onclick="modalClick('recentOrders','recentOrdersButton')">
-            RECENT ORDERS
+        <li id="recentOrdersButton" style="width:25.7%;">
+            <a class="button menu-header-buttons" href="{% url 'recent_orders' %}">RECENT ORDERS</a>
         </li>
-        <li id="favoriteButton" class="button menu-header-buttons" onclick="modalClick('favorites','favoriteButton')">
-            FAVORITES
+        <li id="favoriteButton" style="width:25.7%;">
+            <a class="button menu-header-buttons" href="{% url 'favorites' %}">FAVORITES</a>
         </li>
-        <li id="cartButton" class="button menu-header-buttons" onclick="modalClick('cart','cartButton')">
-            CART
+        <li id="cartButton" style="width:25.7%;">
+            <a class="button menu-header-buttons" href="{% url 'view_cart' %}" >VIEW CART</a>
         </li>
     </ul>
     {% else %}
     <h2 style="text-align:center;">Hello Guest!</h2>
     <ul style="list-style: none;padding:0;margin:0;display:flex;justify-content:center;">
-        <li id="guestCartButton" class="button menu-header-buttons" onclick="modalClick('guestCartButton','cartButton')"
-            style="">
+        <li id="guestCartButton" class="button menu-header-buttons">
             CART
         </li>
     </ul>

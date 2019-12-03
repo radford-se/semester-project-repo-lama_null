@@ -71,6 +71,19 @@ def admin_page(request):
     return render(request, 'admin.html', {"data": users})
 
 
+def favorites(request):
+    return render(request, 'favorites.html',{})
+
+
+def recent_orders(request):
+    return render(request, 'recent_orders.html', {})
+
+
+def view_cart(request):
+    cart = CustomerAccount.cart
+    return render(request, 'view_cart.html', {"cart": cart})
+
+
 class InventoryView(View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
