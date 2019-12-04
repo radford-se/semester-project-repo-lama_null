@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ordersystem import views
-
+from ordersystem.models import InventoryItem, Order, Category
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,7 +39,3 @@ urlpatterns = [
 urlpatterns += [
     path('ordersystem/', include('ordersystem.urls')),
 ]
-
-# cart_list = {
-#     'queryset' : Cart.objects.all(),
-# }

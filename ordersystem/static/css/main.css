@@ -4740,7 +4740,7 @@ div#login-background{
     display:flex;
     flex-wrap:wrap;
     width:22%;
-    height:175px;
+    height:150px;
     border-radius:10px;
     margin:10px;
     background-image:linear-gradient(to top, white, #e1fff5);

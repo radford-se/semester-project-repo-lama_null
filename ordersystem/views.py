@@ -4,11 +4,12 @@ import stripe
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, update_session_auth_hash
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import InventoryItem, Category, CustomerAccount, Order
 from django.views.generic.base import View, TemplateView
+from .forms import RegisterForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -29,12 +30,12 @@ def logout_user(request):
 def ordering_page(request):
     items = InventoryItem.objects.all()
     categories = Category.objects.all()
-    return render(request, 'ordering_page.html', {'items': items, 'categories': categories})
+    return render(request, 'ordering_page.html', {'items': items, 'categories': categories, })
 
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -42,7 +43,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             return redirect('../thankyou')
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 
@@ -110,8 +111,7 @@ def recent_orders(request):
 
 
 def view_cart(request):
-    cart = CustomerAccount.cart
-    return render(request, 'view_cart.html', {"cart": cart})
+    return render(request, 'view_cart.html', {})
 
 
 class InventoryView(View):
