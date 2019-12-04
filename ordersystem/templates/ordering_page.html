@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Now</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+    <script src="{% static 'js/modal.js' %}"></script>
+</head>
+<body class="is-preload">
+
+
+<div id="login-background">
+    <div class="modal" id="recentOrders">
+        <div class="modal-content">
+            <span class="close">x</span>
+            <h2>Recent Orders</h2>
+            <p>Order 1</p>
+            <p>Order 2</p>
+        </div>
+    </div>
+    <div class="modal" id="favorites">
+        <div class="modal-content">
+            <span class="close">x</span>
+            <h2>Favorites</h2>
+            <p>item 1</p>
+            <p>item 2</p>
+        </div>
+    </div>
+    <div class="modal" id="cart">
+        <div class="modal-content">
+            <span class="close">x</span>
+            <h2>Cart</h2>
+            <p>item 1</p>
+            <p>item 2</p>
+            <a class="button">Go to Checkout</a>
+        </div>
+    </div>
+    {% if request.user.is_authenticated %}
+
+    <h2 style="text-align:center;">Hello {{ request.user.username }}</h2>
+    <h1>{{cart}}</h1>
+    <ul style="list-style: none;padding:0;margin:0;display:flex;justify-content:space-around;">
+
+        <li style="width:25.7%;">
+            <a class="button primary" href="{% url 'change_settings' %}">Account settings</a>
+        </li>
+        <li id="recentOrdersButton" class="button menu-header-buttons" onclick="modalClick('recentOrders','recentOrdersButton')">
+            RECENT ORDERS
+        </li>
+        <li id="favoriteButton" class="button menu-header-buttons" onclick="modalClick('favorites','favoriteButton')">
+            FAVORITES
+        </li>
+        <li id="cartButton" class="button menu-header-buttons" onclick="modalClick('cart','cartButton')">
+            CART
+        </li>
+    </ul>
+    {% else %}
+    <h2 style="text-align:center;">Hello Guest!</h2>
+    <ul style="list-style: none;padding:0;margin:0;display:flex;justify-content:center;">
+        <li id="guestCartButton" class="button menu-header-buttons" onclick="modalClick('guestCartButton','cartButton')"
+            style="">
+            CART
+        </li>
+    </ul>
+    {% endif %}
+    <br/>
+    <section id="menu-section">
+        <header style="width:100%; margin:auto; text-align:center"><h2>Select an item<br/></h2></header>
+        {% for category in categories %}
+            <h3 class="category-name">{{category.name}}</h3>
+            {% for item in items %}
+                {% if item.category == category %}
+                <article class="item-article">
+                    <h4 class="item-name">{{item.name}}</h4>
+                    <span class="item-price">${{item.price}}</span><br/>
+                    <button class="item-cart-button" id="{{item.name}}">add to cart
+                    </button>
+                </article>
+                {% endif %}
+            {% endfor %}
+            <hr style="width:100%;margin:10px;"/>
+        {% endfor %}
+    </section>
+
+    {% if not request.user.is_authenticated %}
+    <p>You are seeing a guest version of our ordering page. Click here to create an account, or login</p>
+    <a class="button primary" href="{%  url 'signup' %}">Sign Up</a>
+    <a class="button primary" href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+</body>
+</html>
