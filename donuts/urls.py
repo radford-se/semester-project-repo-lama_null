@@ -32,6 +32,9 @@ urlpatterns = [
     path('accounts/change_password/', views.change_password, name='change_password'),
     path('orders/', OrderListView.as_view(), name='orders'),
     path('accounts/settings/', views.change_settings, name='change_settings'),
+    path('paypage/', views.payment_page.as_view(), name='paypage'),
+    path('paypage/confirmation/', views.charge, name='confirmation'),
+
 ]
 
 urlpatterns += [
@@ -39,7 +42,7 @@ urlpatterns += [
 ]
 
 item_list = {
-    'queryset' : InventoryItem.objects.all(),
+    'queryset': InventoryItem.objects.all(),
 }
 order_list = {
     'queryset': Order.objects.all(),

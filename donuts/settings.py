@@ -126,3 +126,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/ordering_page/'
+
+STRIPE_SECRET_KEY = 'sk_test_fmWEjj4bOoUNicBbMs5Tdly8007mH1kBhm'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_IbnKZ5hlkM0uyQdSh5GHc6I900snpIMea2'

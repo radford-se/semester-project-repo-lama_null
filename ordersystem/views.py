@@ -1,4 +1,7 @@
 # Create your views here.
+import stripe
+
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
@@ -6,7 +9,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from .models import InventoryItem, Order, Cart, Category
-from django.views.generic.base import View
+from django.views.generic.base import View, TemplateView
+from django.shortcuts import render
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def index(request):
@@ -57,13 +63,36 @@ def change_settings(request):
     return render(request, 'registration/settings.html')
 
 
-
 # def ordering_page(request):
 #     return render(request, 'ordering_page.html', {})
 
 
 def thankyou(request):
     return render(request, 'thankyou.html', {})
+
+
+def payment(request):
+    return render(request, 'payments.html', {})
+
+
+class payment_page(TemplateView):
+    template_name = 'payments.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
+        return context
+
+
+def charge(request):
+    if request.method == 'POST':
+        charge = stripe.Charge.create(
+            amount=500,
+            currency='usd',
+            description='A Django charge',
+            source=request.POST['stripeToken']
+        )
+    return render(request, 'payment_confirmation.html')
 
 
 class InventoryView(View):
