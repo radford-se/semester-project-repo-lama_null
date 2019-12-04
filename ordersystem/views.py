@@ -114,12 +114,3 @@ def view_cart(request):
     return render(request, 'view_cart.html', {})
 
 
-class InventoryView(View):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        all_items = InventoryItem.objects.all()
-
-        context["menu_items"] = all_items
-        context["test"] = "test"
-
-        return context
