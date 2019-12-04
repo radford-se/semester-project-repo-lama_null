@@ -18,7 +18,6 @@ from django.urls import path, include
 from ordersystem import views
 from ordersystem.models import InventoryItem, Order, Category
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -33,18 +32,10 @@ urlpatterns = [
     path('accounts/recent_orders/', views.recent_orders, name='recent_orders'),
     path('accounts/favorites/', views.favorites, name='favorites'),
     path('accounts/view_cart/', views.view_cart, name='view_cart'),
+    path('payments/', views.payment_page.as_view(), name='paypage'),
+    path('payments/confirmation/', views.charge, name='confirmation'),
 ]
 
 urlpatterns += [
     path('ordersystem/', include('ordersystem.urls')),
 ]
-
-item_list = {
-    'queryset' : InventoryItem.objects.all(),
-}
-order_list = {
-    'queryset': Order.objects.all(),
-}
-category_list = {
-    'queryset': Category.objects.all(),
-}

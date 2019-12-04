@@ -1,13 +1,17 @@
 # Create your views here.
+import stripe
+
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import InventoryItem, Category, UserAccount, Order
+from .models import InventoryItem, Category, CustomerAccount, Order
+from django.views.generic.base import View, TemplateView
 from .forms import RegisterForm
 
-from django.views.generic.base import View
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def index(request):
@@ -20,7 +24,7 @@ def login(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('../')
+    return redirect('../accounts/login')
 
 
 def ordering_page(request):
@@ -68,6 +72,35 @@ def thankyou(request):
     return render(request, 'thankyou.html', {})
 
 
+def payment(request):
+    return render(request, 'payments.html', {})
+
+
+class payment_page(TemplateView):
+    template_name = 'payments.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
+        return context
+
+
+def charge(request):
+    if request.method == 'POST':
+        charge = stripe.Charge.create(
+            amount=500,
+            currency='usd',
+            description='A Django charge',
+            source=request.POST['stripeToken']
+        )
+    return render(request, 'payment_confirmation.html')
+
+
+def admin_page(request):
+    users = CustomerAccount.objects.all()
+    return render(request, 'admin.html', {"data": users})
+
+
 def favorites(request):
     return render(request, 'favorites.html',{})
 
@@ -81,12 +114,3 @@ def view_cart(request):
     return render(request, 'view_cart.html', {})
 
 
-class InventoryView(View):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        all_items = InventoryItem.objects.all()
-
-        context["menu_items"] = all_items
-        context["test"] = "test"
-
-        return context

@@ -127,3 +127,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/ordering_page/'
+
+STRIPE_SECRET_KEY = 'put secret key here'
+STRIPE_PUBLISHABLE_KEY = 'put publishable key here'
