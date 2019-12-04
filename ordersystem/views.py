@@ -5,8 +5,9 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from .models import InventoryItem, Order, Cart, Category
+from .models import InventoryItem, Order, Cart, Category, ItemCartRelationship
 from django.views.generic.base import View
+from django.shortcuts import get_object_or_404, render
 
 
 def index(request):
@@ -20,6 +21,23 @@ def login(request):
 def logout_user(request):
     logout(request)
     return redirect('../')
+
+
+def button(request):
+    return render(request,'ordering_page.html')
+
+
+def add_to_cart(request, inventory_item_id):
+    item = get_object_or_404(InventoryItem, pk=inventory_item_id)
+    if request.user.is_authenticated():
+        cart = request.user.cart_id
+    else:
+        cart = None
+    item = ItemCartRelationship.create(
+        cart_id=cart,
+        item_id=item.id)
+    item.save()
+    return render(request, 'ordering_page.html', {'item': item})
 
 
 def signup(request):
@@ -57,11 +75,6 @@ def change_settings(request):
     return render(request, 'registration/settings.html')
 
 
-
-# def ordering_page(request):
-#     return render(request, 'ordering_page.html', {})
-
-
 def thankyou(request):
     return render(request, 'thankyou.html', {})
 
@@ -91,19 +104,13 @@ class ItemListView(ListView):
     context_object_name = 'items'
     model = InventoryItem
 
-    # def get_context_data(self, **kwargs):
-    #     context = {}
-    #     categories = Category.objects.all()
-    #
-    #     for category in categories:
-    #         context['items_in_current_cart'] = InventoryItem.objects.filter(category=self.category)
-    #     return context
-
 
 class CategoryListView(ListView):
     context_object_name = 'categories'
     model = Category
 
-    def get_context_data(self,**kwargs):
+    def get_context_data(self, **kwargs):
         context = Category.name
         return context
+
+

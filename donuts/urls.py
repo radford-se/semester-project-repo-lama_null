@@ -17,9 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from ordersystem import views
 from ordersystem.models import InventoryItem, Order, Category
-from ordersystem.views import ItemListView, OrderListView, CategoryListView
+from ordersystem.views import ItemListView, OrderListView
 
-
+app_name = 'ordersystem'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -32,6 +32,7 @@ urlpatterns = [
     path('accounts/change_password/', views.change_password, name='change_password'),
     path('orders/', OrderListView.as_view(), name='orders'),
     path('accounts/settings/', views.change_settings, name='change_settings'),
+    path('ordering_page/', views.add_to_cart, name='ordersystem')
 ]
 
 urlpatterns += [
