@@ -67,10 +67,6 @@ def change_settings(request):
     return render(request, 'registration/settings.html')
 
 
-# def ordering_page(request):
-#     return render(request, 'ordering_page.html', {})
-
-
 def thankyou(request):
     return render(request, 'thankyou.html', {})
 
@@ -99,15 +95,9 @@ def charge(request):
     return render(request, 'payment_confirmation.html')
 
 
-class InventoryView(View):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        all_items = InventoryItem.objects.all()
-
-        context["menu_items"] = all_items
-        context["test"] = "test"
-
-        return context
+def admin_page(request):
+    users = CustomerAccount.objects.all()
+    return render(request, 'admin.html', {"data": users})
 
 
 def favorites(request):
@@ -123,3 +113,13 @@ def view_cart(request):
     cart = CustomerAccount.cart
     return render(request, 'view_cart.html', {"cart": cart})
 
+
+class InventoryView(View):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        all_items = InventoryItem.objects.all()
+
+        context["menu_items"] = all_items
+        context["test"] = "test"
+
+        return context
