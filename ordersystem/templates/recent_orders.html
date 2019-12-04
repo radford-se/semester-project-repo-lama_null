@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recent Orders</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+</head>
+<body>
+<div id="login-background">
+{% if request.user.is_authenticated %}
+<h1>Recent Orders</h1>
+{% for order in orders %}
+    {% if request.user.username == order.customer.username %}
+    <div style="border: 3px solid #212931; margin: 5px; padding: 5px;">
+    <h2 style="margin: 0">Date: {{order.date}}</h2>
+    <h2>Total Cost: ${{order.total_cost}}</h2>
+        {% for item in items %}
+            {% for number in item.orders.all %}
+                {% if number|slugify == order.order_number|slugify %}
+                   <p style="margin: 0">Type: {{ item.name }}</p>
+                   <p style="margin: 0">Cost: ${{ item.price }}</p>
+                   <br>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endfor %}
+{% else %}
+<h1>You are not signed in, click below to go to home page</h1>
+<a class="button primary">Return to Home Page</a>
+{% endif %}
+    </div>
+</body>
+</html>

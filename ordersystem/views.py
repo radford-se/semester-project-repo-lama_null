@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import InventoryItem, Category, CustomerAccount
+from .models import InventoryItem, Category, CustomerAccount, Order
 from django.views.generic.base import View
 
 
@@ -76,7 +76,9 @@ def favorites(request):
 
 
 def recent_orders(request):
-    return render(request, 'recent_orders.html', {})
+    orders = Order.objects.all()
+    items = InventoryItem.objects.all()
+    return render(request, 'recent_orders.html', {"orders": orders, "items": items})
 
 
 def view_cart(request):
