@@ -23,7 +23,7 @@ def login(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('../')
+    return redirect('../accounts/login')
 
 
 def ordering_page(request):
