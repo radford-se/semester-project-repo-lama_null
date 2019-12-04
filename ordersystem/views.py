@@ -25,8 +25,7 @@ def logout_user(request):
 def ordering_page(request):
     items = InventoryItem.objects.all()
     categories = Category.objects.all()
-    cart = UserAccount.cart
-    return render(request, 'ordering_page.html', {'items': items, 'categories': categories, 'cart': cart})
+    return render(request, 'ordering_page.html', {'items': items, 'categories': categories, })
 
 
 def signup(request):
