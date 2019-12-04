@@ -11,7 +11,7 @@
 </head>
 <body>
     <div id="login-background">
-        <h2>Buy for $5.00</h2>
+        <h2>Checkout</h2>
         <form action="{% url 'confirmation' %}" method="post">
             {% csrf_token %}
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
