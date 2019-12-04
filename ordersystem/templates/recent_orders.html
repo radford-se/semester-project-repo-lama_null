@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recent Orders</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+</head>
+<body>
+<div id="login-background">
+{% if request.user.is_authenticated %}
+<h1>Recent Orders</h1>
+{% for order in orders %}
+ <h2>{{order.customer}}</h2>
+{% endfor %}
+{% else %}
+<h1>You are not signed in, click below to go to home page</h1>
+<a class="button primary">Return to Home Page</a>
+{% endif %}
+    </div>
+</body>
+</html>
