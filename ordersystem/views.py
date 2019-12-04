@@ -107,7 +107,8 @@ def favorites(request):
 
 def recent_orders(request):
     orders = Order.objects.all()
-    return render(request, 'recent_orders.html', {"orders": orders})
+    items = InventoryItem.objects.all()
+    return render(request, 'recent_orders.html', {"orders": orders, "items": items})
 
 
 def view_cart(request):
