@@ -4,8 +4,7 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.views.generic.list import ListView
-from .models import InventoryItem, Order, Cart, Category
+from .models import InventoryItem, Category, CustomerAccount, Order
 from django.views.generic.base import View
 
 
@@ -20,6 +19,12 @@ def login(request):
 def logout_user(request):
     logout(request)
     return redirect('../')
+
+
+def ordering_page(request):
+    items = InventoryItem.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'ordering_page.html', {'items': items, 'categories': categories})
 
 
 def signup(request):
@@ -57,13 +62,27 @@ def change_settings(request):
     return render(request, 'registration/settings.html')
 
 
-
-# def ordering_page(request):
-#     return render(request, 'ordering_page.html', {})
-
-
 def thankyou(request):
     return render(request, 'thankyou.html', {})
+
+
+def admin_page(request):
+    users = CustomerAccount.objects.all()
+    return render(request, 'admin.html', {"data": users})
+
+
+def favorites(request):
+    return render(request, 'favorites.html',{})
+
+
+def recent_orders(request):
+    orders = Order.objects.all()
+    return render(request, 'recent_orders.html', {"orders": orders})
+
+
+def view_cart(request):
+    cart = CustomerAccount.cart
+    return render(request, 'view_cart.html', {"cart": cart})
 
 
 class InventoryView(View):
@@ -74,36 +93,4 @@ class InventoryView(View):
         context["menu_items"] = all_items
         context["test"] = "test"
 
-        return context
-
-
-class OrderListView(ListView):
-    context_object_name = 'orders'
-    model = Order
-
-
-class CartListView(ListView):
-    context_object_name = 'cart'
-    model = Cart
-
-
-class ItemListView(ListView):
-    context_object_name = 'items'
-    model = InventoryItem
-
-    # def get_context_data(self, **kwargs):
-    #     context = {}
-    #     categories = Category.objects.all()
-    #
-    #     for category in categories:
-    #         context['items_in_current_cart'] = InventoryItem.objects.filter(category=self.category)
-    #     return context
-
-
-class CategoryListView(ListView):
-    context_object_name = 'categories'
-    model = Category
-
-    def get_context_data(self,**kwargs):
-        context = Category.name
         return context
