@@ -11,58 +11,28 @@
     <script src="{% static 'js/modal.js' %}"></script>
 </head>
 <body class="is-preload">
-
-
 <div id="login-background">
-    <div class="modal" id="recentOrders">
-        <div class="modal-content">
-            <span class="close">x</span>
-            <h2>Recent Orders</h2>
-            <p>Order 1</p>
-            <p>Order 2</p>
-        </div>
-    </div>
-    <div class="modal" id="favorites">
-        <div class="modal-content">
-            <span class="close">x</span>
-            <h2>Favorites</h2>
-            <p>item 1</p>
-            <p>item 2</p>
-        </div>
-    </div>
-    <div class="modal" id="cart">
-        <div class="modal-content">
-            <span class="close">x</span>
-            <h2>Cart</h2>
-            <p>item 1</p>
-            <p>item 2</p>
-            <a class="button">Go to Checkout</a>
-        </div>
-    </div>
     {% if request.user.is_authenticated %}
-
     <h2 style="text-align:center;">Hello {{ request.user.username }}</h2>
-    <h1>{{cart}}</h1>
-    <ul style="list-style: none;padding:0;margin:0;display:flex;justify-content:space-around;">
+    <ul style="list-style: none;padding:0;margin:0; display:flex; justify-content:space-around;">
 
         <li style="width:25.7%;">
-            <a class="button primary" href="{% url 'change_settings' %}">Account settings</a>
+            <a class="button primary menu-header-buttons" href="{% url 'change_settings' %}">Account settings</a>
         </li>
-        <li id="recentOrdersButton" class="button menu-header-buttons" onclick="modalClick('recentOrders','recentOrdersButton')">
-            RECENT ORDERS
+        <li id="recentOrdersButton" style="width:25.7%;">
+            <a class="button menu-header-buttons" href="{% url 'recent_orders' %}">RECENT ORDERS</a>
         </li>
-        <li id="favoriteButton" class="button menu-header-buttons" onclick="modalClick('favorites','favoriteButton')">
-            FAVORITES
+        <li id="favoriteButton" style="width:25.7%;">
+            <a class="button menu-header-buttons" href="{% url 'favorites' %}">FAVORITES</a>
         </li>
-        <li id="cartButton" class="button menu-header-buttons" onclick="modalClick('cart','cartButton')">
-            CART
+        <li id="cartButton" style="width:25.7%;">
+            <a class="button menu-header-buttons" href="{% url 'view_cart' %}" >VIEW CART</a>
         </li>
     </ul>
     {% else %}
     <h2 style="text-align:center;">Hello Guest!</h2>
     <ul style="list-style: none;padding:0;margin:0;display:flex;justify-content:center;">
-        <li id="guestCartButton" class="button menu-header-buttons" onclick="modalClick('guestCartButton','cartButton')"
-            style="">
+        <li id="guestCartButton" class="button menu-header-buttons">
             CART
         </li>
     </ul>
@@ -71,21 +41,20 @@
     <section id="menu-section">
         <header style="width:100%; margin:auto; text-align:center"><h2>Select an item<br/></h2></header>
         {% for category in categories %}
-            <h3 class="category-name">{{category.name}}</h3>
-            {% for item in items %}
-                {% if item.category == category %}
-                <article class="item-article">
-                    <h4 class="item-name">{{item.name}}</h4>
-                    <span class="item-price">${{item.price}}</span><br/>
-                    <button class="item-cart-button" id="{{item.name}}">add to cart
-                    </button>
-                </article>
-                {% endif %}
-            {% endfor %}
-            <hr style="width:100%;margin:10px;"/>
+        <h3 class="category-name">{{category.name}}</h3>
+        {% for item in items %}
+        {% if item.category == category %}
+        <article class="item-article">
+            <h4 class="item-name">{{item.name}}</h4>
+            <span class="item-price">${{item.price}}</span><br/>
+            <button class="item-cart-button" id="{{item.name}}">add to cart
+            </button>
+        </article>
+        {% endif %}
+        {% endfor %}
+        <hr style="width:100%;margin:10px;"/>
         {% endfor %}
     </section>
-
     {% if not request.user.is_authenticated %}
     <p>You are seeing a guest version of our ordering page. Click here to create an account, or login</p>
     <a class="button primary" href="{%  url 'signup' %}">Sign Up</a>

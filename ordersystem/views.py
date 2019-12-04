@@ -4,8 +4,9 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import InventoryItem, Category, UserAccount
+from .models import InventoryItem, Category, UserAccount, Order
 from .forms import RegisterForm
+
 from django.views.generic.base import View
 
 
@@ -65,6 +66,19 @@ def change_settings(request):
 
 def thankyou(request):
     return render(request, 'thankyou.html', {})
+
+
+def favorites(request):
+    return render(request, 'favorites.html',{})
+
+
+def recent_orders(request):
+    orders = Order.objects.all()
+    return render(request, 'recent_orders.html', {"orders": orders})
+
+
+def view_cart(request):
+    return render(request, 'view_cart.html', {})
 
 
 class InventoryView(View):
