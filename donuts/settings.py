@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ordersystem',
+    'import_export',
 ]
 
 MIDDLEWARE = [
