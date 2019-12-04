@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+</head>
+<body><div id="login-background">
+    {% if request.user.is_authenticated %}
+        <h2>Hello {{user.username}}</h2>
+        needs cart data : (
+        <h2>CLICK BELOW TO GO TO CHECKOUT</h2>
+        <a class="button primary" href="">Checkout</a>
+    {% else %}
+        <h2>You are not signed in. Click below to go back to the home page.</h2>
+        <a class="button primary" href="{% url 'index' %}">Home Page</a>
+    {% endif %}
+    </div>
+</body>
+</html>
