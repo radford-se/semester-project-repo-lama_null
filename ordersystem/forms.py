@@ -11,10 +11,11 @@ class RegisterForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)
-        user_cart = Cart(customer=user.id)
-        user_cart.save()
 
         if commit:
             user.save()
+
+        user_cart = Cart(customer=user)
+        user_cart.save()
 
         return user
