@@ -1,4 +1,3 @@
-# Create your views here.
 import stripe
 
 from django.conf import settings
@@ -40,15 +39,12 @@ def button(request):
 def add_to_cart(request, inventory_item_id):
     item1 = get_object_or_404(InventoryItem, pk=inventory_item_id)
     cart = get_object_or_404(Cart, customer=request.user.id)
-    # if request.user.is_authenticated():
-    #     cart = request.user.cart_id
-    # else:
-    #     cart = None
+
     item = ItemCartRelationship(
         cart_id=cart,
         item_id=item1)
     item.save()
-    return render(request, 'ordering_page.html') #, {'item': item})
+    return render(request, 'ordering_page.html')
 
 
 def signup(request):
@@ -58,7 +54,7 @@ def signup(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            authenticate(username=username, password=raw_password)
             return redirect('../thankyou')
     else:
         form = RegisterForm()
@@ -105,7 +101,7 @@ class payment_page(TemplateView):
 
 def charge(request):
     if request.method == 'POST':
-        charge = stripe.Charge.create(
+        stripe.Charge.create(
             amount=500,
             currency='usd',
             description='A Django charge',

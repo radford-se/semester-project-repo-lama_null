@@ -61,7 +61,6 @@ class AccountManager(BaseUserManager):
         return user
 
 
-# Create your models here.
 class UserAccount(AbstractBaseUser):
     # Fields
     username = models.CharField(verbose_name='username', unique=True, max_length=15)
