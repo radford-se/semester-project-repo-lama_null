@@ -2,13 +2,10 @@ from unittest import skipIf
 
 from django.test import TestCase
 
-# Create your tests here.
 from ordersystem.models import \
     CustomerAccount, \
     UserAccount, \
-    Cart, \
-    InventoryItem, \
-    Order
+    Cart
 
 
 class UserAccountTest(TestCase):

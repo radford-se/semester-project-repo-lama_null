@@ -1,4 +1,3 @@
-from django import forms
 from .models import UserAccount, Cart
 from django.contrib.auth.forms import UserCreationForm
 
