@@ -19,6 +19,6 @@ urlpatterns = [
     path('accounts/recent_orders/', views.recent_orders, name='recent_orders'),
     path('accounts/favorites/', views.favorites, name='favorites'),
     path('accounts/view_cart/', views.view_cart, name='view_cart'),
-    path('payments/', views.payment_page.as_view(), name='paypage'),
-    path('payments/confirmation/', views.charge, name='confirmation'),
+    path('accounts/view_cart/', views.payment_page.as_view(), name='paypage'),
+    path('accounts/view_cart/confirmation/', views.charge, name='confirmation'),
 ]

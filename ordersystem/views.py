@@ -86,12 +86,8 @@ def thankyou(request):
     return render(request, 'thankyou.html', {})
 
 
-def payment(request):
-    return render(request, 'payments.html', {})
-
-
 class payment_page(TemplateView):
-    template_name = 'payments.html'
+    template_name = 'view_cart.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -122,6 +118,6 @@ def recent_orders(request):
 
 def view_cart(request):
     cart = ItemCartRelationship.objects.all()
-    return render(request, 'view_cart.html', {"cart":cart})
+    return render(request, 'view_cart.html', {"cart": cart})
 
 
