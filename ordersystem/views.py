@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import InventoryItem, Category, Order
+from .models import InventoryItem, Category, Order, ItemCartRelationship
 from django.views.generic.base import View, TemplateView
 from .forms import RegisterForm
 
@@ -40,14 +40,13 @@ def button(request):
 def add_to_cart(request, inventory_item_id):
     item1 = get_object_or_404(InventoryItem, pk=inventory_item_id)
     # if request.user.is_authenticated():
-    #     pass
     #     cart = request.user.cart_id
     # else:
     #     cart = None
-    # item = ItemCartRelationship(
-    #     cart_id=request.user.cart_id,
-    #     item_id=item1)
-    # item.save()
+    item = ItemCartRelationship(
+        cart_id=request.user.cart_id,
+        item_id=item1)
+    item.save()
     return render(request, 'ordering_page.html') #, {'item': item})
 
 
@@ -125,6 +124,7 @@ def recent_orders(request):
 
 
 def view_cart(request):
+    cart = ItemCartRelationship.objects.all()
     return render(request, 'view_cart.html', {})
 
 

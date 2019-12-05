@@ -8,29 +8,37 @@
     <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
-    <script>
-        totalcost = 0;
-        window.onload=function addTotalCost() {
-            {%  for item in cart %}
-                {% if request.user.username == item.cart_id.customer.username %}
-                    totalcost= totalcost + {{ item.item_id.price }}*{{ item.quantity }};
-                {% endif %}
-            {% endfor %}
-            document.getElementById('output').innerHTML = "Total Cost: " + totalcost;
-        }
-    </script>
+<script>
+    totalcost = 0;
+    window.onload=function addTotalCost() {
+        {%  for item in cart %}
+            {% if request.user.username == item.cart_id.customer.username %}
+                totalcost= totalcost + {{ item.item_id.price }}*{{ item.quantity }};
+            {% endif %}
+        {% endfor %}
+        document.getElementById('output').innerHTML = "Total Cost: " + totalcost;
+    }
+</script>
 </head>
-<body>
-    <div id="login-background">
-        {% if request.user.is_authenticated %}
-            <h2>Hello {{user.username}}</h2>
-        {% else %}
-            <h2>Hello Guest</h2>
-        {% endif %}
-        <p>needs cart data : (</p>
+<body><div id="login-background">
+    {% if request.user.is_authenticated %}
+        <h1>Hello {{user.username}}</h1>
+        <h2>Current Cart</h2>
+        {%  for item in cart %}
+            {% if request.user.username == item.cart_id.customer.username %}
+                <p style="margin: 0;">Type: {{ item.item_id.name }}</p>
+                <p style="margin: 0;">Cost: {{ item.item_id.price }}</p>
+                <p style="margin: 0;">Quantity: {{ item.quantity }}</p>
+                <br>
+            {% endif %}
+        {% endfor %}
+        <h3 id="output">Total Cost: </h3>
         <h2>CLICK BELOW TO GO TO CHECKOUT</h2>
         <a class="button primary" href="{% url 'paypage' %}">Checkout</a>
+    {% else %}
+        <h2>You are not signed in. Click below to go back to the home page.</h2>
         <a class="button primary" href="{% url 'index' %}">Home Page</a>
+    {% endif %}
     </div>
 </body>
 </html>
