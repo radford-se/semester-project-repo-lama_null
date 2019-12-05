@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 from ordersystem import views
 from ordersystem.models import InventoryItem, Order, Category
-from ordersystem.views import ItemListView, OrderListView
 
 app_name = 'ordersystem'
 urlpatterns = [
@@ -26,28 +25,19 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('accounts/login/', views.login, name='login'),
     path('signup/', views.signup, name='signup'),
-    path('ordering_page/', ItemListView.as_view(), name='ordering_page'),
+    path('ordering_page/', views.ordering_page, name='ordering_page'),
     path('logout/', views.logout_user, name='logout'),
     path('thankyou/', views.thankyou, name='thankyou'),
     path('accounts/change_password/', views.change_password, name='change_password'),
-    path('orders/', OrderListView.as_view(), name='orders'),
     path('accounts/settings/', views.change_settings, name='change_settings'),
     path('ordering_page/<int:inventory_item_id>', views.add_to_cart, name='add_to_cart')
+    path('accounts/recent_orders/', views.recent_orders, name='recent_orders'),
+    path('accounts/favorites/', views.favorites, name='favorites'),
+    path('accounts/view_cart/', views.view_cart, name='view_cart'),
+    path('payments/', views.payment_page.as_view(), name='paypage'),
+    path('payments/confirmation/', views.charge, name='confirmation'),
 ]
 
 urlpatterns += [
     path('ordersystem/', include('ordersystem.urls')),
 ]
-
-item_list = {
-    'queryset' : InventoryItem.objects.all(),
-}
-order_list = {
-    'queryset': Order.objects.all(),
-}
-category_list = {
-    'queryset': Category.objects.all(),
-}
-# cart_list = {
-#     'queryset' : Cart.objects.all(),
-# }

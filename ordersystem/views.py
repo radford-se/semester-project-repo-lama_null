@@ -1,13 +1,17 @@
 # Create your views here.
+import stripe
+
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, logout, update_session_auth_hash
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.views.generic.list import ListView
-from .models import InventoryItem, Order, Cart, Category, ItemCartRelationship
-from django.views.generic.base import View
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
+from .models import InventoryItem, Category, CustomerAccount, Order, ItemCartRelationship
+from django.views.generic.base import View, TemplateView
+from .forms import RegisterForm
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def index(request):
@@ -20,7 +24,13 @@ def login(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('../')
+    return redirect('../accounts/login')
+
+
+def ordering_page(request):
+    items = InventoryItem.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'ordering_page.html', {'items': items, 'categories': categories, })
 
 
 def button(request):
@@ -42,7 +52,7 @@ def add_to_cart(request, inventory_item_id):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -50,7 +60,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             return redirect('../thankyou')
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 
@@ -79,38 +89,46 @@ def thankyou(request):
     return render(request, 'thankyou.html', {})
 
 
-class InventoryView(View):
+def payment(request):
+    return render(request, 'payments.html', {})
+
+
+class payment_page(TemplateView):
+    template_name = 'payments.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        all_items = InventoryItem.objects.all()
-
-        context["menu_items"] = all_items
-        context["test"] = "test"
-
+        context['key'] = settings.STRIPE_PUBLISHABLE_KEY
         return context
 
 
-class OrderListView(ListView):
-    context_object_name = 'orders'
-    model = Order
+def charge(request):
+    if request.method == 'POST':
+        charge = stripe.Charge.create(
+            amount=500,
+            currency='usd',
+            description='A Django charge',
+            source=request.POST['stripeToken']
+        )
+    return render(request, 'payment_confirmation.html')
 
 
-class CartListView(ListView):
-    context_object_name = 'cart'
-    model = Cart
+def admin_page(request):
+    users = CustomerAccount.objects.all()
+    return render(request, 'admin.html', {"data": users})
 
 
-class ItemListView(ListView):
-    context_object_name = 'items'
-    model = InventoryItem
+def favorites(request):
+    return render(request, 'favorites.html',{})
 
 
-class CategoryListView(ListView):
-    context_object_name = 'categories'
-    model = Category
+def recent_orders(request):
+    orders = Order.objects.all()
+    items = InventoryItem.objects.all()
+    return render(request, 'recent_orders.html', {"orders": orders, "items": items})
 
-    def get_context_data(self, **kwargs):
-        context = Category.name
-        return context
+
+def view_cart(request):
+    return render(request, 'view_cart.html', {})
 
 

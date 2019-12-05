@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Orders</title>
+    <title>Title</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
 </head>
 <body>
-<div id="login-background">
-    <h1>Hello admin </h1>
-{% for order in orders %}
-    <p>{{order.customer}}</p>
-{% endfor %}
-</div>
+    <div id="login-background">
+        <h2>Thank You For Paying</h2>
+        <h3>Your order will be available for pickup tomorrow.</h3>
+        <form method="post" >
+            <a class="button primary" href="{% url 'index' %}">Return to Home</a>
+        </form>
+    </div>
 </body>
 </html>
