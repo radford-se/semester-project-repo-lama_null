@@ -124,7 +124,7 @@ class Order(models.Model):
 class ItemCartRelationship(models.Model):
     cart_id = models.ForeignKey("Cart", on_delete=models.CASCADE)
     item_id = models.ForeignKey("InventoryItem", on_delete=models.CASCADE)
-    quantity = models.IntegerField(null=False, blank=False)
+    quantity = models.IntegerField(null=False, blank=False, default=1)
 
 
 class Category(models.Model):

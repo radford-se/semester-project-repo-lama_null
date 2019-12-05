@@ -16,7 +16,8 @@
                 totalcost= totalcost + {{ item.item_id.price }}*{{ item.quantity }};
             {% endif %}
         {% endfor %}
-        document.getElementById('output').innerHTML = "Total Cost: " + totalcost;
+        totalcost = totalcost.toFixed(2);
+        document.getElementById('output').innerHTML = "Total Cost: $" + totalcost;
     }
 </script>
 </head>
@@ -27,7 +28,7 @@
         {%  for item in cart %}
             {% if request.user.username == item.cart_id.customer.username %}
                 <p style="margin: 0;">Type: {{ item.item_id.name }}</p>
-                <p style="margin: 0;">Cost: {{ item.item_id.price }}</p>
+                <p style="margin: 0;">Cost: ${{ item.item_id.price }}</p>
                 <p style="margin: 0;">Quantity: {{ item.quantity }}</p>
                 <br>
             {% endif %}
