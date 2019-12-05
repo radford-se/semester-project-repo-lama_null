@@ -45,7 +45,7 @@
         <article style="display:flex; flex-wrap:wrap; width:22%; height:150px; border-radius:10px; margin:10px; background-image:linear-gradient(to top, white, #e1fff5); justify-content:center; align-items:flex-end; filter:drop-shadow(1p 1px 1px grey);">
             <h4 style="width:100%; text-align:center;margin:0; padding:0;align-self:flex-start; overflow-wrap:break-word">{{item.name}}</h4>
             <span style="width:100%; text-align:center;  align-self:flex-end;margin:0; align-self:flex-end; font-family:sans-serif;">${{item.price}}</span><br/>
-            <button style="width:100%; background-color:white; align-self:flex-end; margin:0; justify-self:center;" onclick="location.href='{% url 'add_to_cart' item.id %}'">[Add to Cart]</button>
+            <button style="width:100%; background-color:white; align-self:flex-end; margin:0; justify-self:center;" onclick="location.href='{% url 'add_to_cart' item.id%}'">[Add to Cart]</button>
         </article>
         {% endfor %}
     </section>

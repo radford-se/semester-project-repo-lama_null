@@ -32,7 +32,7 @@ urlpatterns = [
     path('accounts/change_password/', views.change_password, name='change_password'),
     path('orders/', OrderListView.as_view(), name='orders'),
     path('accounts/settings/', views.change_settings, name='change_settings'),
-    path('ordering_page/', views.add_to_cart, name='ordersystem')
+    path('ordering_page/<int:inventory_item_id>', views.add_to_cart, name='add_to_cart')
 ]
 
 urlpatterns += [

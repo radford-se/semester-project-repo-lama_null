@@ -37,7 +37,7 @@ def add_to_cart(request, inventory_item_id):
         cart_id=cart,
         item_id=item.id)
     item.save()
-    return render(request, 'ordering_page.html', {'item': item})
+    return render(request, 'ordering_page.html') #, {'item': item})
 
 
 def signup(request):
