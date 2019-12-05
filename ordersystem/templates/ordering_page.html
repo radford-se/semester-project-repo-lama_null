@@ -32,8 +32,8 @@
     {% else %}
     <h2 style="text-align:center;">Hello Guest!</h2>
     <ul style="list-style: none;padding:0;margin:0;display:flex;justify-content:center;">
-        <li id="guestCartButton" class="button menu-header-buttons">
-            CART
+        <li id="guestCartButton" style="width: 100%">
+            <a class="button menu-header-buttons" href="{% url 'view_cart' %}" >CART</a>
         </li>
     </ul>
     {% endif %}
