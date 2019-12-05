@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from .models import InventoryItem, Category, Order
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import InventoryItem, Category, Order, ItemCartRelationship, Cart
 from django.views.generic.base import View, TemplateView
 from .forms import RegisterForm
 
@@ -31,6 +31,24 @@ def ordering_page(request):
     items = InventoryItem.objects.all()
     categories = Category.objects.all()
     return render(request, 'ordering_page.html', {'items': items, 'categories': categories, })
+
+
+def button(request):
+    return render(request,'ordering_page.html')
+
+
+def add_to_cart(request, inventory_item_id):
+    item1 = get_object_or_404(InventoryItem, pk=inventory_item_id)
+    cart = get_object_or_404(Cart, customer=request.user.id)
+    # if request.user.is_authenticated():
+    #     cart = request.user.cart_id
+    # else:
+    #     cart = None
+    item = ItemCartRelationship(
+        cart_id=cart,
+        item_id=item1)
+    item.save()
+    return render(request, 'ordering_page.html') #, {'item': item})
 
 
 def signup(request):
@@ -107,6 +125,7 @@ def recent_orders(request):
 
 
 def view_cart(request):
-    return render(request, 'view_cart.html', {})
+    cart = ItemCartRelationship.objects.all()
+    return render(request, 'view_cart.html', {"cart":cart})
 
 

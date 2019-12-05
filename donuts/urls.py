@@ -18,6 +18,7 @@ from django.urls import path, include
 from ordersystem import views
 from ordersystem.models import InventoryItem, Order, Category
 
+app_name = 'ordersystem'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('thankyou/', views.thankyou, name='thankyou'),
     path('accounts/change_password/', views.change_password, name='change_password'),
     path('accounts/settings/', views.change_settings, name='change_settings'),
+    path('ordering_page/<int:inventory_item_id>/', views.add_to_cart, name='add_to_cart'),
     path('accounts/recent_orders/', views.recent_orders, name='recent_orders'),
     path('accounts/favorites/', views.favorites, name='favorites'),
     path('accounts/view_cart/', views.view_cart, name='view_cart'),
