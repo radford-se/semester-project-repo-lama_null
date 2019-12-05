@@ -38,15 +38,16 @@ def button(request):
 
 
 def add_to_cart(request, inventory_item_id):
-    item = get_object_or_404(InventoryItem, pk=inventory_item_id)
-    if request.user.is_authenticated():
-        cart = request.user.cart_id
-    else:
-        cart = None
-    item = ItemCartRelationship.create(
-        cart_id=cart,
-        item_id=item.id)
-    item.save()
+    item1 = get_object_or_404(InventoryItem, pk=inventory_item_id)
+    # if request.user.is_authenticated():
+    #     pass
+    #     cart = request.user.cart_id
+    # else:
+    #     cart = None
+    # item = ItemCartRelationship(
+    #     cart_id=request.user.cart_id,
+    #     item_id=item1)
+    # item.save()
     return render(request, 'ordering_page.html') #, {'item': item})
 
 

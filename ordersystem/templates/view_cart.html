@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+    <script>
+        totalcost = 0;
+        window.onload=function addTotalCost() {
+            {%  for item in cart %}
+                {% if request.user.username == item.cart_id.customer.username %}
+                    totalcost= totalcost + {{ item.item_id.price }}*{{ item.quantity }};
+                {% endif %}
+            {% endfor %}
+            document.getElementById('output').innerHTML = "Total Cost: " + totalcost;
+        }
+    </script>
 </head>
 <body><div id="login-background">
     {% if request.user.is_authenticated %}

@@ -47,8 +47,7 @@
         <article class="item-article">
             <h4 class="item-name">{{item.name}}</h4>
             <span class="item-price">${{item.price}}</span><br/>
-            <button class="item-cart-button" id="{{item.name}}">add to cart
-            </button>
+            <button class="item-cart-button" id="{{item.name}}" onclick="location.href='{% url 'add_to_cart' item.id %}'">add to cart</button>
         </article>
         {% endif %}
         {% endfor %}

@@ -105,6 +105,7 @@ class UserAccount(AbstractBaseUser):
         return self.is_superuser
 
 
+
 class CustomerAccount(UserAccount):
     pass
 
