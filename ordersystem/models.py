@@ -24,7 +24,7 @@ class InventoryItem(models.Model):
 
 
 class Cart(models.Model):
-    customer = models.OneToOneField("CustomerAccount",
+    customer = models.OneToOneField("UserAccount",
                                     on_delete=models.CASCADE,
                                     null=True)
 
@@ -105,18 +105,10 @@ class UserAccount(AbstractBaseUser):
         return self.is_superuser
 
 
-class CustomerAccount(UserAccount):
-    pass
-
-
-class AdminAccount(UserAccount):
-    pass
-
-
 class Order(models.Model):
     # Fields
     order_number = models.IntegerField(null=False, default=00000000)
-    customer = models.ForeignKey(CustomerAccount, on_delete=models.CASCADE)
+    customer = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
     total_cost = models.DecimalField(max_digits=5, decimal_places=2, null=True)
 
