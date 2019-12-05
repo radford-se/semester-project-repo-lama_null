@@ -8,16 +8,29 @@
     <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/social-media-buttons.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/noscript.css' %}"/>
+    <script>
+        var totalcost = 0;
+        window.onload=function addTotalCost() {
+            {% for item in cart %}
+                totalcost = totalcost + 1;
+                {% if request.user.username == item.cart_id.customer.username %}
+                    totalcost= totalcost + {{ item.item_id.price }}*{{ item.quantity }};
+                {% endif %}
+            {% endfor %}
+            document.getElementById('demo').innerHTML = "Total Cost: " + totalcost;
+         }
+    </script>
 </head>
 <body>
     <div id="login-background">
         <h2>Checkout</h2>
+        <h3 id = "demo"></h3>
         <form action="{% url 'confirmation' %}" method="post">
             {% csrf_token %}
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="{{ key }}"
               data-description="Checkout"
-              data-amount="500"
+              data-amount=totalcost
               data-locale="auto">
             </script>
         </form>

@@ -90,10 +90,6 @@ def thankyou(request):
     return render(request, 'thankyou.html', {})
 
 
-def payment(request):
-    return render(request, 'payments.html', {})
-
-
 class payment_page(TemplateView):
     template_name = 'payments.html'
 
@@ -101,6 +97,10 @@ class payment_page(TemplateView):
         context = super().get_context_data(**kwargs)
         context['key'] = settings.STRIPE_PUBLISHABLE_KEY
         return context
+
+    def payment(self):
+        cart = ItemCartRelationship.objects.all()
+        return render(self, 'payments.html', {"cart": cart})
 
 
 def charge(request):
@@ -126,6 +126,6 @@ def recent_orders(request):
 
 def view_cart(request):
     cart = ItemCartRelationship.objects.all()
-    return render(request, 'view_cart.html', {"cart":cart})
+    return render(request, 'view_cart.html', {"cart": cart})
 
 
