@@ -96,11 +96,6 @@ def charge(request):
     return render(request, 'payment_confirmation.html')
 
 
-def admin_page(request):
-    users = CustomerAccount.objects.all()
-    return render(request, 'admin.html', {"data": users})
-
-
 def favorites(request):
     return render(request, 'favorites.html',{})
 
