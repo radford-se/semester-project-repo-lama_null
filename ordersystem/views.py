@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import InventoryItem, Category, CustomerAccount, Order
+from .models import InventoryItem, Category, Order
 from django.views.generic.base import View, TemplateView
 from .forms import RegisterForm
 
