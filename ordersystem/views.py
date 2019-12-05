@@ -6,8 +6,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render, redirect
-from .models import InventoryItem, Category, CustomerAccount, Order, ItemCartRelationship
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import InventoryItem, Category, Order
 from django.views.generic.base import View, TemplateView
 from .forms import RegisterForm
 
@@ -112,11 +112,6 @@ def charge(request):
             source=request.POST['stripeToken']
         )
     return render(request, 'payment_confirmation.html')
-
-
-def admin_page(request):
-    users = CustomerAccount.objects.all()
-    return render(request, 'admin.html', {"data": users})
 
 
 def favorites(request):
